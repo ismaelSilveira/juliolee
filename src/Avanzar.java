@@ -31,7 +31,7 @@ public class Avanzar implements Behavior {
 	public void action() {
 		seguir = true;
 		LCD.drawString("Forward",0,1);
-		pilot.forward();
+//		pilot.forward();
 		while (seguir)
 			Thread.yield();
 		pilot.stop();

@@ -6,14 +6,15 @@ import lejos.nxt.UltrasonicSensor;
 import lejos.robotics.subsumption.Behavior;
 
 public class SubirPala implements Behavior {
-	private static int DISTANCIA_PARED = 21;
+	static int DISTANCIA_PARED;
 	UltrasonicSensor sonar;
 	NXTRegulatedMotor motor;
 
-	public SubirPala(NXTRegulatedMotor motor_pala, SensorPort puerto_sonar) {
+	public SubirPala(NXTRegulatedMotor motor_pala, SensorPort puerto_sonar, int dist_pared) {
 		motor = motor_pala;
 		motor.resetTachoCount();
 		sonar = new UltrasonicSensor(puerto_sonar);
+		DISTANCIA_PARED = dist_pared;
 	}
 
 	@Override
