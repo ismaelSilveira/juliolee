@@ -24,14 +24,13 @@ public class Avanzar implements Behavior {
 
 	@Override
 	public boolean takeControl() {
-		LCD.drawInt(sonar.getDistance(),0,2);
-		return sonar.getDistance() > 21;
+		return true;
 	}
 
 	@Override
 	public void action() {
+		seguir = true;
 		LCD.drawString("Forward",0,1);
-		Sound.beep();
 		pilot.forward();
 		while (seguir)
 			Thread.yield();
