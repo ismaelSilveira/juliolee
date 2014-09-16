@@ -1,5 +1,7 @@
+import lejos.nxt.LCD;
 import lejos.nxt.Motor;
 import lejos.nxt.SensorPort;
+import lejos.nxt.Sound;
 import lejos.nxt.UltrasonicSensor;
 import lejos.nxt.addon.CompassHTSensor;
 import lejos.robotics.navigation.CompassPilot;
@@ -16,17 +18,20 @@ public class Avanzar implements Behavior {
 		sonar = new UltrasonicSensor(puerto_sonar);
 		compass = new CompassHTSensor(puerto_compass);
 		pilot = new CompassPilot(compass, 33, 144, Motor.A, Motor.B, false);
+		pilot.setTravelSpeed(300);
+		pilot.setRotateSpeed(30);
 	}
 
 	@Override
 	public boolean takeControl() {
+		LCD.drawInt(sonar.getDistance(),0,2);
 		return sonar.getDistance() > 21;
 	}
 
 	@Override
 	public void action() {
-		pilot.setTravelSpeed(300);
-		pilot.setRotateSpeed(30);
+		LCD.drawString("Forward",0,1);
+		Sound.beep();
 		pilot.forward();
 		while (seguir)
 			Thread.yield();

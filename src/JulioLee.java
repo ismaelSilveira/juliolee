@@ -1,3 +1,4 @@
+import lejos.nxt.LCD;
 import lejos.nxt.SensorPort;
 import lejos.robotics.subsumption.Arbitrator;
 import lejos.robotics.subsumption.Behavior;
@@ -13,6 +14,7 @@ public class JulioLee {
 			Thread.sleep(3000);
 		} catch (Exception e) {
 		}
+		LCD.drawString("Arranca",0,0);
 		arbitro.start();
 	}
 }
