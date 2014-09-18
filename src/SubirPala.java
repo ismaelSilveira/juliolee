@@ -1,4 +1,3 @@
-import lejos.nxt.LCD;
 import lejos.nxt.NXTRegulatedMotor;
 import lejos.nxt.SensorPort;
 import lejos.nxt.Sound;
@@ -7,28 +6,28 @@ import lejos.robotics.subsumption.Behavior;
 
 public class SubirPala implements Behavior {
 	static int DISTANCIA_PARED;
-	UltrasonicSensor sonar;
+	UltrasonicSensor sonar_izq;
+	UltrasonicSensor sonar_der;
 	NXTRegulatedMotor motor;
 
-	public SubirPala(NXTRegulatedMotor motor_pala, SensorPort puerto_sonar, int dist_pared) {
+	public SubirPala(NXTRegulatedMotor motor_pala, SensorPort puerto_sonar_izq, SensorPort puerto_sonar_der, int dist_pared) {
 		motor = motor_pala;
 		motor.resetTachoCount();
-		sonar = new UltrasonicSensor(puerto_sonar);
+		sonar_izq = new UltrasonicSensor(puerto_sonar_izq);
+		sonar_der = new UltrasonicSensor(puerto_sonar_der);
 		DISTANCIA_PARED = dist_pared;
 	}
 
 	@Override
 	public boolean takeControl() {
-		LCD.clear();
-		LCD.drawInt(sonar.getDistance(),0,2);
-		return sonar.getDistance() <= DISTANCIA_PARED;
+		return sonar_izq.getDistance() <= DISTANCIA_PARED || sonar_der.getDistance() <= DISTANCIA_PARED;
 	}
 
 	@Override
 	public void action() {
 		Sound.beep();
 		motor.rotateTo(0);
-		while(sonar.getDistance() <= DISTANCIA_PARED)
+		while(sonar_izq.getDistance() <= DISTANCIA_PARED)
 			Thread.yield();
 	}
 

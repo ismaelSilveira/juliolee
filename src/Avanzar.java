@@ -12,14 +12,16 @@ public class Avanzar implements Behavior {
 	private CompassHTSensor compass;
 	private CompassPilot pilot;
 	UltrasonicSensor sonar;
+	final int DISTANCIA_PARED;
 	boolean seguir;
 
-	public Avanzar(SensorPort puerto_sonar, SensorPort puerto_compass) {
+	public Avanzar(SensorPort puerto_sonar, SensorPort puerto_compass,
+			int dist_pared) {
 		sonar = new UltrasonicSensor(puerto_sonar);
 		compass = new CompassHTSensor(puerto_compass);
 		pilot = new CompassPilot(compass, 33, 144, Motor.A, Motor.B, false);
 		pilot.setTravelSpeed(300);
-		pilot.setRotateSpeed(30);
+		DISTANCIA_PARED = dist_pared;
 	}
 
 	@Override
@@ -30,9 +32,9 @@ public class Avanzar implements Behavior {
 	@Override
 	public void action() {
 		seguir = true;
-		LCD.drawString("Forward",0,1);
-//		pilot.forward();
-		while (seguir)
+		pilot.setRotateSpeed(45);
+		pilot.forward();
+		while (seguir && sonar.getDistance() > DISTANCIA_PARED)
 			Thread.yield();
 		pilot.stop();
 	}
