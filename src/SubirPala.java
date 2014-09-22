@@ -1,6 +1,7 @@
 import lejos.nxt.NXTRegulatedMotor;
 import lejos.nxt.UltrasonicSensor;
 import lejos.robotics.navigation.CompassPilot;
+import lejos.robotics.navigation.DifferentialPilot;
 import lejos.robotics.subsumption.Behavior;
 
 @SuppressWarnings("deprecation")
@@ -8,11 +9,11 @@ public class SubirPala implements Behavior {
 	static int DISTANCIA_PARED;
 	UltrasonicSensor sonar_izq;
 	UltrasonicSensor sonar_der;
-	CompassPilot pilot;
+	DifferentialPilot pilot;
 	NXTRegulatedMotor pala;
 
 	public SubirPala(NXTRegulatedMotor motor_pala, UltrasonicSensor s_izq,
-			UltrasonicSensor s_der, CompassPilot p, int dist_pared) {
+			UltrasonicSensor s_der, DifferentialPilot p, int dist_pared) {
 		pala = motor_pala;
 		pala.resetTachoCount();
 		pala.setSpeed(30);

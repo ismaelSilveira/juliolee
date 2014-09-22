@@ -1,15 +1,16 @@
 import lejos.nxt.UltrasonicSensor;
 import lejos.robotics.navigation.CompassPilot;
+import lejos.robotics.navigation.DifferentialPilot;
 import lejos.robotics.subsumption.Behavior;
 
 @SuppressWarnings("deprecation")
 public class Avanzar implements Behavior {
-	private CompassPilot pilot;
+	private DifferentialPilot pilot;
 	UltrasonicSensor sonar;
 	final int DISTANCIA_PARED;
 	boolean seguir;
 
-	public Avanzar(CompassPilot p, UltrasonicSensor s, int dist_pared) {
+	public Avanzar(DifferentialPilot p, UltrasonicSensor s, int dist_pared) {
 		sonar = s;
 		pilot = p;		
 		DISTANCIA_PARED = dist_pared;
@@ -23,13 +24,11 @@ public class Avanzar implements Behavior {
 	@Override
 	public void action() {
 		seguir = true;
-		pilot.resetCartesianZero();
-		pilot.setHeading(0);
 		pilot.setTravelSpeed(300);
 		pilot.forward();
 		while (seguir)
 			Thread.yield();
-		pilot.stop();
+		pilot.quickStop();
 	}
 
 	@Override
