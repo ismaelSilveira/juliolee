@@ -1,5 +1,4 @@
 import lejos.nxt.UltrasonicSensor;
-import lejos.robotics.navigation.CompassPilot;
 import lejos.robotics.navigation.DifferentialPilot;
 import lejos.robotics.subsumption.Behavior;
 
@@ -28,7 +27,7 @@ public class Avanzar implements Behavior {
 		pilot.forward();
 		while (seguir)
 			Thread.yield();
-		pilot.quickStop();
+		pilot.stop();
 	}
 
 	@Override

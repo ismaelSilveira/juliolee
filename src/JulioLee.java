@@ -2,8 +2,6 @@ import lejos.nxt.LCD;
 import lejos.nxt.Motor;
 import lejos.nxt.SensorPort;
 import lejos.nxt.UltrasonicSensor;
-import lejos.nxt.addon.CompassHTSensor;
-import lejos.robotics.navigation.CompassPilot;
 import lejos.robotics.navigation.DifferentialPilot;
 import lejos.robotics.subsumption.Arbitrator;
 import lejos.robotics.subsumption.Behavior;
@@ -21,16 +19,17 @@ public class JulioLee {
 		// CompassHTSensor compass = new CompassHTSensor(PUERTO_COMPASS);
 
 		// Inicializacion de actuadores
-		DifferentialPilot pilot = new DifferentialPilot(33, 144, Motor.A,
-				Motor.B);
+		DifferentialPilot pilot = new DifferentialPilot(33, 144, Motor.B,
+				Motor.A);
 
 		// Inicializacion de comportamientos
 		Behavior avanzar = new Avanzar(pilot, sonar_izq, DISTANCIA_PARED);
-		Behavior subir_pala = new SubirPala(Motor.C, sonar_izq, null, pilot,
+		Behavior subir_pala = new SubirPala(Motor.C, sonar_izq, pilot,
 				DISTANCIA_PARED);
-		Behavior bajar_pala = new BajarPala(Motor.C, sonar_izq, null,
+		Behavior bajar_pala = new BajarPala(Motor.C, sonar_izq,
 				DISTANCIA_PARED);
-		Behavior[] comportamientos = { avanzar, bajar_pala, subir_pala };
+		Behavior girar = new Girar(Motor.C, pilot, sonar_izq);
+		Behavior[] comportamientos = { avanzar, bajar_pala, girar, subir_pala };
 		// Behavior[] comportamientos = { bajar_pala, subir_pala };
 
 		Arbitrator arbitro = new Arbitrator(comportamientos);
