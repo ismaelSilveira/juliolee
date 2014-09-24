@@ -12,7 +12,7 @@ public class Avanzar implements Behavior {
 
 	public Avanzar(DifferentialPilot p, UltrasonicSensor s, int dist_pared) {
 		sonar = s;
-		pilot = p;		
+		pilot = p;
 		DISTANCIA_PARED = dist_pared;
 	}
 
