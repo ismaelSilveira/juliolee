@@ -32,6 +32,7 @@ public class SubirPala implements Behavior {
 		pilot.setTravelSpeed(30);
 		pilot.travel(-20);
 		pala.rotateTo(0);
+		pilot.rotate(-90);
 	}
 
 	@Override

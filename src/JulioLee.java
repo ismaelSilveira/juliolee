@@ -19,18 +19,14 @@ public class JulioLee {
 		// CompassHTSensor compass = new CompassHTSensor(PUERTO_COMPASS);
 
 		// Inicializacion de actuadores
-		DifferentialPilot pilot = new DifferentialPilot(33, 144, Motor.B,
-				Motor.A);
+		DifferentialPilot pilot = new DifferentialPilot(40, 170, Motor.B, Motor.A);
 
 		// Inicializacion de comportamientos
 		Behavior avanzar = new Avanzar(pilot, sonar_izq, DISTANCIA_PARED);
-		Behavior subir_pala = new SubirPala(Motor.C, sonar_izq, pilot,
-				DISTANCIA_PARED);
-		Behavior bajar_pala = new BajarPala(Motor.C, sonar_izq,
-				DISTANCIA_PARED);
+		Behavior subir_pala = new SubirPala(Motor.C, sonar_izq, pilot, DISTANCIA_PARED);
+		Behavior bajar_pala = new BajarPala(Motor.C, sonar_izq, DISTANCIA_PARED);
 		Behavior girar = new Girar(Motor.C, pilot, sonar_izq);
-		Behavior[] comportamientos = { avanzar, bajar_pala, girar, subir_pala };
-		// Behavior[] comportamientos = { bajar_pala, subir_pala };
+		Behavior[] comportamientos = { avanzar, girar, bajar_pala, subir_pala };
 
 		Arbitrator arbitro = new Arbitrator(comportamientos);
 		try {
