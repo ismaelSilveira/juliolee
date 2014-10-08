@@ -1,24 +1,22 @@
-import lejos.nxt.LCD;
 import lejos.nxt.NXTRegulatedMotor;
 import lejos.nxt.Sound;
 import lejos.nxt.UltrasonicSensor;
-import lejos.robotics.navigation.DifferentialPilot;
 import lejos.robotics.subsumption.Behavior;
 
-@SuppressWarnings("deprecation")
 public class SubirPala implements Behavior {
+	private NXTRegulatedMotor motorIzq, motorDer;
 	static int DISTANCIA_PARED;
 	UltrasonicSensor sonar_izq;
-	DifferentialPilot pilot;
 	NXTRegulatedMotor pala;
 
-	public SubirPala(NXTRegulatedMotor motor_pala, UltrasonicSensor s_izq, DifferentialPilot p, int dist_pared) {
+	public SubirPala(NXTRegulatedMotor izq, NXTRegulatedMotor der, NXTRegulatedMotor motor_pala, UltrasonicSensor s_izq, int dist_pared) {
 		pala = motor_pala;
 		pala.resetTachoCount();
 		pala.setSpeed(30);
 		sonar_izq = s_izq;
-		pilot = p;
 		DISTANCIA_PARED = dist_pared;
+		motorIzq = izq;
+		motorDer = der;
 	}
 
 	@Override
@@ -29,14 +27,14 @@ public class SubirPala implements Behavior {
 	@Override
 	public void action() {
 		Sound.beep();
-		pilot.setTravelSpeed(30);
-		pilot.travel(-20);
 		pala.rotateTo(0);
-		pilot.rotate(-90);
+		motorIzq.rotate(-720, true);
+		motorDer.rotate(-720, false);
+		motorIzq.rotate(1440, true);
+		motorDer.rotate(-1440, false);
 	}
 
 	@Override
-	public void suppress() {
-	}
+	public void suppress() { }
 
 }

@@ -1,18 +1,19 @@
+import lejos.nxt.NXTRegulatedMotor;
 import lejos.nxt.UltrasonicSensor;
-import lejos.robotics.navigation.DifferentialPilot;
 import lejos.robotics.subsumption.Behavior;
 
-@SuppressWarnings("deprecation")
 public class Avanzar implements Behavior {
-	private DifferentialPilot pilot;
+	private NXTRegulatedMotor motorDer, motorIzq, pala;
 	UltrasonicSensor sonar;
 	final int DISTANCIA_PARED;
 	boolean seguir;
 
-	public Avanzar(DifferentialPilot p, UltrasonicSensor s, int dist_pared) {
+	public Avanzar(NXTRegulatedMotor izq, NXTRegulatedMotor der, NXTRegulatedMotor pala, UltrasonicSensor s, int dist_pared) {
 		sonar = s;
-		pilot = p;
+		motorDer = der;
+		motorIzq = izq;
 		DISTANCIA_PARED = dist_pared;
+		this.pala = pala;
 	}
 
 	@Override
@@ -23,11 +24,18 @@ public class Avanzar implements Behavior {
 	@Override
 	public void action() {
 		seguir = true;
-		pilot.setTravelSpeed(300);
-		pilot.forward();
+		motorIzq.setAcceleration(300);
+		motorDer.setAcceleration(300);
+		motorIzq.setSpeed(650);
+		motorDer.setSpeed(715);
+		motorDer.forward();
+		motorIzq.forward();
+		
 		while (seguir)
 			Thread.yield();
-		pilot.stop();
+		pala.rotate(15);
+		motorIzq.stop();
+		motorDer.stop();
 	}
 
 	@Override

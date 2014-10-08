@@ -1,23 +1,17 @@
 import lejos.nxt.NXTRegulatedMotor;
-import lejos.nxt.Sound;
-import lejos.nxt.UltrasonicSensor;
-import lejos.robotics.navigation.DifferentialPilot;
 import lejos.robotics.subsumption.Behavior;
 
 import java.util.Random;
 
-@SuppressWarnings("deprecation")
 public class Girar implements Behavior {
-	private DifferentialPilot pilot;
-	private UltrasonicSensor sonar;
-	private NXTRegulatedMotor pala;
+	private NXTRegulatedMotor pala, motorIzq, motorDer;
 	private Random r = new Random(6846515);
 	private boolean hasControl = false;
 	
-	public Girar(NXTRegulatedMotor pala, DifferentialPilot pilot, UltrasonicSensor sonar) {
+	public Girar(NXTRegulatedMotor izq, NXTRegulatedMotor der, NXTRegulatedMotor pala) {
 		this.pala = pala;
-		this.pilot = pilot;
-		this.sonar = sonar;
+		motorIzq = izq;
+		motorDer = der;
 	}
 
 	@Override
@@ -27,10 +21,9 @@ public class Girar implements Behavior {
 
 	@Override
 	public void action() {
-		pilot.setTravelSpeed(30);
 		pala.rotateTo(0);
-		pilot.rotate(-90);
-		pala.rotate(-106);
+		motorIzq.rotate(1440, true);
+		motorDer.rotate(-1440, false);
 		hasControl = false;
 	}
 
