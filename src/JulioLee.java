@@ -23,7 +23,7 @@ public class JulioLee {
 		Behavior subir_pala = new SubirPala(Motor.B, Motor.A, Motor.C, sonar_izq, DISTANCIA_PARED);
 		Behavior bajar_pala = new BajarPala(Motor.C, sonar_izq, DISTANCIA_PARED);
 		Behavior girar = new Girar(Motor.B, Motor.A, Motor.C);
-		Behavior[] comportamientos = { avanzar, girar, bajar_pala, subir_pala };
+		Behavior[] comportamientos = {avanzar, girar, bajar_pala, subir_pala };
 
 		Arbitrator arbitro = new Arbitrator(comportamientos);
 		try {
