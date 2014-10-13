@@ -30,7 +30,6 @@ public class JulioLee {
 		Behavior girar = new Girar(Motor.B, Motor.A, Motor.C, compass, com);
 		Behavior acomodar = new SensarYPatear(com);
 		Behavior[] comportamientos = { avanzar, girar, bajar_pala, subir_pala, acomodar };
-		
 		/*CompassHTSensor compass = new CompassHTSensor(SensorPort.S2);
 		compass.resetCartesianZero();
 		Motor.B.setSpeed(50);
