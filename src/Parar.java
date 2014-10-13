@@ -13,20 +13,22 @@ public class Parar implements Behavior {
 	UltrasonicSensor sonar_der;
 	final int DISTANCIA_PARED;
 	boolean seguir;
+	private Comunicacion com;
 
 	public Parar(SensorPort puerto_sonar_izq, SensorPort puerto_sonar_der,
-			SensorPort puerto_compass, int dist_pared) {
+			SensorPort puerto_compass, int dist_pared, Comunicacion com) {
 		sonar_izq = new UltrasonicSensor(puerto_sonar_izq);
 		sonar_der = new UltrasonicSensor(puerto_sonar_der);
 		compass = new CompassHTSensor(puerto_compass);
 		pilot = new CompassPilot(compass, 33, 144, Motor.A, Motor.B, false);
 		DISTANCIA_PARED = dist_pared;
+		this.com = com;
 	}
 
 	@Override
 	public boolean takeControl() {
 		return pilot.isMoving() && (sonar_der.getDistance() <= DISTANCIA_PARED
-				|| sonar_izq.getDistance() <= DISTANCIA_PARED);
+				|| sonar_izq.getDistance() <= DISTANCIA_PARED) && (com.getComunicandose() == Comunicacion.SIN_COMUNICACION);
 	}
 
 	@Override

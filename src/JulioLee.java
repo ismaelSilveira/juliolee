@@ -15,15 +15,18 @@ public class JulioLee {
 		// Inicializacion de sensores
 		UltrasonicSensor sonar_izq = new UltrasonicSensor(PUERTO_SONAR_IZQ);
 		// CompassHTSensor compass = new CompassHTSensor(PUERTO_COMPASS);
+		Comunicacion com = new Comunicacion();
+		com.start();
 
 		// Inicializacion de actuadores
 
 		// Inicializacion de comportamientos
-		Behavior avanzar = new Avanzar(Motor.B, Motor.A, Motor.C, sonar_izq, DISTANCIA_PARED);
-		Behavior subir_pala = new SubirPala(Motor.B, Motor.A, Motor.C, sonar_izq, DISTANCIA_PARED);
-		Behavior bajar_pala = new BajarPala(Motor.C, sonar_izq, DISTANCIA_PARED);
-		Behavior girar = new Girar(Motor.B, Motor.A, Motor.C);
-		Behavior[] comportamientos = { avanzar, girar, bajar_pala, subir_pala };
+		Behavior avanzar = new Avanzar(Motor.B, Motor.A, Motor.C, sonar_izq, DISTANCIA_PARED, com);
+		Behavior subir_pala = new SubirPala(Motor.B, Motor.A, Motor.C, sonar_izq, DISTANCIA_PARED, com);
+		Behavior bajar_pala = new BajarPala(Motor.C, sonar_izq, DISTANCIA_PARED,com);
+		Behavior girar = new Girar(Motor.B, Motor.A, Motor.C, com);
+		Behavior acomodar = new Acomodar(com);
+		Behavior[] comportamientos = { avanzar, girar, bajar_pala, subir_pala, acomodar };
 
 		Arbitrator arbitro = new Arbitrator(comportamientos);
 		try {

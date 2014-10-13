@@ -7,18 +7,20 @@ public class Avanzar implements Behavior {
 	UltrasonicSensor sonar;
 	final int DISTANCIA_PARED;
 	boolean seguir;
+	Comunicacion com;
 
-	public Avanzar(NXTRegulatedMotor izq, NXTRegulatedMotor der, NXTRegulatedMotor pala, UltrasonicSensor s, int dist_pared) {
+	public Avanzar(NXTRegulatedMotor izq, NXTRegulatedMotor der, NXTRegulatedMotor pala, UltrasonicSensor s, int dist_pared, Comunicacion com) {
 		sonar = s;
 		motorDer = der;
 		motorIzq = izq;
 		DISTANCIA_PARED = dist_pared;
 		this.pala = pala;
+		this.com = com;
 	}
 
 	@Override
 	public boolean takeControl() {
-		return true;
+		return (true && (com.getComunicandose() == Comunicacion.SIN_COMUNICACION));
 	}
 
 	@Override

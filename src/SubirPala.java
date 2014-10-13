@@ -8,8 +8,9 @@ public class SubirPala implements Behavior {
 	static int DISTANCIA_PARED;
 	UltrasonicSensor sonar_izq;
 	NXTRegulatedMotor pala;
+	private Comunicacion com;
 
-	public SubirPala(NXTRegulatedMotor izq, NXTRegulatedMotor der, NXTRegulatedMotor motor_pala, UltrasonicSensor s_izq, int dist_pared) {
+	public SubirPala(NXTRegulatedMotor izq, NXTRegulatedMotor der, NXTRegulatedMotor motor_pala, UltrasonicSensor s_izq, int dist_pared, Comunicacion com) {
 		pala = motor_pala;
 		pala.resetTachoCount();
 		pala.setSpeed(30);
@@ -17,6 +18,7 @@ public class SubirPala implements Behavior {
 		DISTANCIA_PARED = dist_pared;
 		motorIzq = izq;
 		motorDer = der;
+		this.com = com;
 	}
 
 	@Override
@@ -32,6 +34,7 @@ public class SubirPala implements Behavior {
 		motorDer.rotate(-720, false);
 		motorIzq.rotate(1440, true);
 		motorDer.rotate(-1440, false);
+		com.setComunicandose(Comunicacion.GET_CONEXION);
 	}
 
 	@Override

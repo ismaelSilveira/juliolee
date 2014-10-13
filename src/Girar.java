@@ -7,16 +7,18 @@ public class Girar implements Behavior {
 	private NXTRegulatedMotor pala, motorIzq, motorDer;
 	private Random r = new Random(6846515);
 	private boolean hasControl = false;
+	private Comunicacion com;
 	
-	public Girar(NXTRegulatedMotor izq, NXTRegulatedMotor der, NXTRegulatedMotor pala) {
+	public Girar(NXTRegulatedMotor izq, NXTRegulatedMotor der, NXTRegulatedMotor pala, Comunicacion com) {
 		this.pala = pala;
 		motorIzq = izq;
 		motorDer = der;
+		this.com = com;
 	}
 
 	@Override
 	public boolean takeControl() {
-		return hasControl = hasControl || r.nextInt(1000) < 10;
+		return ((hasControl = hasControl || r.nextInt(1000) < 10) && (com.getComunicandose() == Comunicacion.SIN_COMUNICACION));
 	}
 
 	@Override
