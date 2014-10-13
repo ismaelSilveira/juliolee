@@ -2,6 +2,7 @@ import lejos.nxt.LCD;
 import lejos.nxt.Motor;
 import lejos.nxt.SensorPort;
 import lejos.nxt.UltrasonicSensor;
+import lejos.nxt.addon.CompassHTSensor;
 import lejos.robotics.subsumption.Arbitrator;
 import lejos.robotics.subsumption.Behavior;
 
@@ -14,6 +15,8 @@ public class JulioLee {
 	public static void main(String[] args) {
 		// Inicializacion de sensores
 		UltrasonicSensor sonar_izq = new UltrasonicSensor(PUERTO_SONAR_IZQ);
+		CompassHTSensor compass = new CompassHTSensor(SensorPort.S2);
+		compass.resetCartesianZero();
 		// CompassHTSensor compass = new CompassHTSensor(PUERTO_COMPASS);
 		Comunicacion com = new Comunicacion();
 		com.start();
@@ -22,11 +25,20 @@ public class JulioLee {
 
 		// Inicializacion de comportamientos
 		Behavior avanzar = new Avanzar(Motor.B, Motor.A, Motor.C, sonar_izq, DISTANCIA_PARED, com);
-		Behavior subir_pala = new SubirPala(Motor.B, Motor.A, Motor.C, sonar_izq, DISTANCIA_PARED, com);
+		Behavior subir_pala = new SubirPala(Motor.B, Motor.A, Motor.C, sonar_izq, DISTANCIA_PARED, compass, com);
 		Behavior bajar_pala = new BajarPala(Motor.C, sonar_izq, DISTANCIA_PARED,com);
-		Behavior girar = new Girar(Motor.B, Motor.A, Motor.C, com);
+		Behavior girar = new Girar(Motor.B, Motor.A, Motor.C, compass, com);
 		Behavior acomodar = new Acomodar(com);
 		Behavior[] comportamientos = { avanzar, girar, bajar_pala, subir_pala, acomodar };
+		
+		/*CompassHTSensor compass = new CompassHTSensor(SensorPort.S2);
+		compass.resetCartesianZero();
+		Motor.B.setSpeed(50);
+		Motor.A.setSpeed(50);
+		compass.startCalibration();
+		Motor.B.rotate(3200, true);
+		Motor.A.rotate(-3200);
+		compass.stopCalibration();*/
 
 		Arbitrator arbitro = new Arbitrator(comportamientos);
 		try {

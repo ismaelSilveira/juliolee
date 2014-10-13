@@ -26,17 +26,15 @@ public class Avanzar implements Behavior {
 	@Override
 	public void action() {
 		seguir = true;
-		motorIzq.setAcceleration(300);
-		motorDer.setAcceleration(300);
-		motorIzq.setSpeed(650);
-		motorDer.setSpeed(715);
+		motorIzq.setSpeed(700);
+		motorDer.setSpeed(660);
 		motorDer.forward();
 		motorIzq.forward();
 		
 		while (seguir)
 			Thread.yield();
-		pala.rotate(15);
-		motorIzq.stop();
+		pala.rotate(5, true);
+		motorIzq.stop(true);
 		motorDer.stop();
 	}
 
