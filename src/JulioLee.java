@@ -28,7 +28,7 @@ public class JulioLee {
 		Behavior subir_pala = new SubirPala(Motor.B, Motor.A, Motor.C, sonar_izq, DISTANCIA_PARED, compass, com);
 		Behavior bajar_pala = new BajarPala(Motor.C, sonar_izq, DISTANCIA_PARED,com);
 		Behavior girar = new Girar(Motor.B, Motor.A, Motor.C, compass, com);
-		Behavior acomodar = new Acomodar(com);
+		Behavior acomodar = new SensarYPatear(com);
 		Behavior[] comportamientos = { avanzar, girar, bajar_pala, subir_pala, acomodar };
 		
 		/*CompassHTSensor compass = new CompassHTSensor(SensorPort.S2);

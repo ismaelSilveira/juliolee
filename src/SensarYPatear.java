@@ -1,10 +1,10 @@
 import lejos.nxt.Sound;
 import lejos.robotics.subsumption.Behavior;
 
-public class Acomodar implements Behavior {
+public class SensarYPatear implements Behavior {
 	Comunicacion com;
 
-	public Acomodar(Comunicacion com) {
+	public SensarYPatear(Comunicacion com) {
 		this.com = com;
 	}
 
