@@ -18,10 +18,9 @@ public class Comunicacion implements Runnable {
 
 	public static int SIN_COMUNICACION = 0;
 	public static int GET_CONEXION = 1;
-	public static int ACOMODAR = 2;
-	public static int ACOMODADO = 3;
-	public static int FIN_SENSADO = 4;
-
+	public static int SENSAR = 2;
+	public static int PATEAR = 3;
+	
 	public Comunicacion() {
 		conector = RS485.getConnector();
 		comunicandose = SIN_COMUNICACION;
