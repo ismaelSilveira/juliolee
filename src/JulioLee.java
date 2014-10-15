@@ -10,7 +10,7 @@ public class JulioLee {
 	// private static SensorPort PUERTO_COMPASS = SensorPort.S2;
 	private static SensorPort PUERTO_SONAR_IZQ = SensorPort.S3;
 	// private static SensorPort PUERTO_SONAR_DER = SensorPort.S1;
-	private static int DISTANCIA_PARED = 24;
+	private static int DISTANCIA_PARED = 23;
 
 	public static void main(String[] args) {
 		// Inicializacion de sensores
@@ -22,12 +22,12 @@ public class JulioLee {
 		// Inicializacion de actuadores
 
 		// Inicializacion de comportamientos
-		Behavior avanzar = new Avanzar(Motor.B, Motor.A, Motor.C, sonar_izq, DISTANCIA_PARED);
+		Behavior avanzar = new Avanzar(Motor.B, Motor.A, sonar_izq, DISTANCIA_PARED);
 		Behavior subir_pala = new SubirPala(Motor.B, Motor.A, Motor.C, sonar_izq, DISTANCIA_PARED, compass);
 		Behavior bajar_pala = new BajarPala(Motor.C, sonar_izq, DISTANCIA_PARED);
 
 		Behavior girar = new Girar(Motor.B, Motor.A, Motor.C, compass);
-		Behavior[] comportamientos = { avanzar, girar, bajar_pala, subir_pala };
+		Behavior[] comportamientos = { avanzar, bajar_pala, girar, subir_pala };
 		/*CompassHTSensor compass = new CompassHTSensor(SensorPort.S2);
 		compass.resetCartesianZero();
 		Motor.B.setSpeed(50);

@@ -14,7 +14,7 @@ public class SubirPala implements Behavior {
 	public SubirPala(NXTRegulatedMotor izq, NXTRegulatedMotor der, NXTRegulatedMotor motor_pala, UltrasonicSensor s_izq, int dist_pared, CompassHTSensor comp) {
 		pala = motor_pala;
 		pala.resetTachoCount();
-		pala.setSpeed(30);
+		pala.setSpeed(15);
 		sonar_izq = s_izq;
 		DISTANCIA_PARED = dist_pared;
 		motorIzq = izq;
@@ -30,9 +30,21 @@ public class SubirPala implements Behavior {
 	@Override
 	public void action() {
 		Sound.beep();
+
+		//Voy para atras asi no queda trancada la pala contra la pared
+		int speedIzq = motorIzq.getSpeed();
+		int speedDer = motorDer.getSpeed();
+		motorIzq.setSpeed(speedIzq >> 2);
+		motorDer.setSpeed(speedDer >> 2);
+		motorIzq.rotate(-70, true);
+		motorDer.rotate(-70, false);
+		motorIzq.setSpeed(speedIzq);
+		motorDer.setSpeed(speedDer);
+		
+		//Subo la pala
 		pala.rotateTo(0);
-		motorIzq.rotate(-180, true);
-		motorDer.rotate(-180, false);
+		
+		//roto
 		motorIzq.rotate(395, true);
 		motorDer.rotate(-395, false);
 		float degrees = compass.getDegreesCartesian(); 

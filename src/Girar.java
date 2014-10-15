@@ -20,7 +20,7 @@ public class Girar implements Behavior {
 
 	@Override
 	public boolean takeControl() {
-		return hasControl = hasControl || r.nextInt(1000) < 10;
+		return hasControl = hasControl || r.nextInt(1000) == 500;
 	}
 
 	@Override
@@ -28,6 +28,7 @@ public class Girar implements Behavior {
 		pala.rotateTo(0);
 		motorIzq.rotate(395, true);
 		motorDer.rotate(-395, false);
+		
 		float degrees = compass.getDegreesCartesian(); 
 		if (degrees > 75 && degrees < 105) {
 			Sound.beep();
