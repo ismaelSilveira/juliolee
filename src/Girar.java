@@ -28,32 +28,37 @@ public class Girar implements Behavior {
 
 	@Override
 	public void action() {
-		LCD.clearDisplay();
-		LCD.drawInt((int) compass.getDegreesCartesian(), 0, 0);
+		Sound.beepSequenceUp();
+		float degrees = compass.getDegreesCartesian();
+		/*LCD.clearDisplay();
+		LCD.drawInt((int) degrees, 0, 0);
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		float degrees = compass.getDegreesCartesian(); 
+		}*/
 		if (degrees >= 315 || degrees < 45) {
-			Sound.beep();
+			Sound.twoBeeps();
 		}
 		else if (degrees >= 45 && degrees < 135){
 			Sound.twoBeeps();
+			Sound.twoBeeps();
 		}
 		else if (degrees >= 135 && degrees < 225){
-			Sound.beep();
+			Sound.twoBeeps();
+			Sound.twoBeeps();
 			Sound.twoBeeps();
 		}
 		else if (degrees >= 225 && degrees < 315){
 			Sound.twoBeeps();
 			Sound.twoBeeps();
-		}/*
+			Sound.twoBeeps();
+			Sound.twoBeeps();
+		}
 		pala.rotateTo(0);
-		motorIzq.rotate(380, true);
-		motorDer.rotate(-380, false);*/
+		motorIzq.rotate(400, true);
+		motorDer.rotate(-410, false);
 		hasControl = false;
 	}
 

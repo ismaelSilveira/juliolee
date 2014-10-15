@@ -23,7 +23,7 @@ public class BajarPala implements Behavior {
 
 	@Override
 	public void action() {
-		motor.rotateTo(-106);
+		motor.rotate(-106,false);
 	}
 
 	@Override
