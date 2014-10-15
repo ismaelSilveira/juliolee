@@ -27,16 +27,17 @@ public class JulioLee {
 		Behavior subir_pala = new SubirPala(Motor.B, Motor.A, Motor.C, sonar_izq, DISTANCIA_PARED, compass, com);
 		Behavior bajar_pala = new BajarPala(Motor.C, sonar_izq, DISTANCIA_PARED,com);
 		Behavior girar = new Girar(Motor.B, Motor.A, Motor.C, compass, com);
-		Behavior acomodar = new SensarYPatear(com);
-		Behavior[] comportamientos = { /*avanzar, */girar/*, bajar_pala, subir_pala, acomodar*/ };
-		/*CompassHTSensor compass2 = new CompassHTSensor(SensorPort.S2);
-		Motor.B.setSpeed(40);
-		Motor.A.setSpeed(40);
-		compass2.startCalibration();
+		Behavior sensarYPatear = new SensarYPatear(com);
+		Behavior[] comportamientos = { avanzar, girar, bajar_pala, subir_pala, sensarYPatear };
+		/*CompassHTSensor compass = new CompassHTSensor(SensorPort.S2);
+		compass.resetCartesianZero();
+		Motor.B.setSpeed(50);
+		Motor.A.setSpeed(50);
+		compass.startCalibration();
 		Motor.B.rotate(3040, true);
 		Motor.A.rotate(-3040);
-		compass2.stopCalibration();*/
-		
+		compass.stopCalibration();*/
+
 		Arbitrator arbitro = new Arbitrator(comportamientos);
 		try {
 			Thread.sleep(3000);
