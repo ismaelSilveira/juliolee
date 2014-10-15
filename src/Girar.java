@@ -1,4 +1,6 @@
+import lejos.nxt.LCD;
 import lejos.nxt.NXTRegulatedMotor;
+import lejos.nxt.Sound;
 import lejos.nxt.addon.CompassHTSensor;
 import lejos.robotics.subsumption.Behavior;
 
@@ -26,9 +28,32 @@ public class Girar implements Behavior {
 
 	@Override
 	public void action() {
+		LCD.clearDisplay();
+		LCD.drawInt((int) compass.getDegreesCartesian(), 0, 0);
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		float degrees = compass.getDegreesCartesian(); 
+		if (degrees >= 315 || degrees < 45) {
+			Sound.beep();
+		}
+		else if (degrees >= 45 && degrees < 135){
+			Sound.twoBeeps();
+		}
+		else if (degrees >= 135 && degrees < 225){
+			Sound.beep();
+			Sound.twoBeeps();
+		}
+		else if (degrees >= 225 && degrees < 315){
+			Sound.twoBeeps();
+			Sound.twoBeeps();
+		}/*
 		pala.rotateTo(0);
-		motorIzq.rotate(1440, true);
-		motorDer.rotate(-1440, false);
+		motorIzq.rotate(380, true);
+		motorDer.rotate(-380, false);*/
 		hasControl = false;
 	}
 

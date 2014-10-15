@@ -35,8 +35,8 @@ public class SubirPala implements Behavior {
 		pala.rotateTo(0);
 		motorIzq.rotate(-180, true);
 		motorDer.rotate(-180, false);
-		motorIzq.rotate(395, true);
-		motorDer.rotate(-395, false);
+		motorIzq.rotate(380, true);
+		motorDer.rotate(-380, false);
 		float degrees = compass.getDegreesCartesian(); 
 		if (degrees > 75 && degrees < 105) {
 			Sound.beep();
