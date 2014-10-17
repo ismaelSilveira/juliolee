@@ -31,14 +31,14 @@ public class SubirPala implements Behavior {
 
 	@Override
 	public void action() {
-		Sound.beepSequence();
+		//Sound.beepSequence();
 		pala.rotateTo(0);
 		motorIzq.rotate(-180, true);
 		motorDer.rotate(-180, false);
 
 		motorIzq.rotate(400, true);
 		motorDer.rotate(-410, false);
-		//com.setComunicandose(Comunicacion.GET_CONEXION);
+		com.setComunicandose(Comunicacion.GET_CONEXION);
 	}
 
 	@Override

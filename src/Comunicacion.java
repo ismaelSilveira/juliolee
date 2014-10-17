@@ -21,7 +21,7 @@ public class Comunicacion implements Runnable {
 	public static int GET_CONEXION = 1;
 	public static int SENSAR = 2;
 	public static int PATEAR = 3;
-	
+
 	public Comunicacion() {
 		conector = RS485.getConnector();
 		comunicandose = SIN_COMUNICACION;
@@ -43,56 +43,56 @@ public class Comunicacion implements Runnable {
 			while (comunicandose == SIN_COMUNICACION) {
 			}
 			LCD.clear();
-LCD.drawString("quiero comunicar", 0, 1);
+			// LCD.drawString("quiero comunicar", 0, 1);
 			conn = conector.connect("JL2", NXTConnection.PACKET);
 			if (conn == null) {
 				comunicandose = SIN_COMUNICACION;
 			}
-			
+
 			dis = conn.openDataInputStream();
 			dos = conn.openDataOutputStream();
 
-			comunicandose = SIN_COMUNICACION;
+			while (comunicandose == GET_CONEXION) {
+			}
+
 			try {
 				dis.close();
 				dos.close();
 				conn.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				//e.printStackTrace();
-				LCD.drawString("error close", 0, 1);
+				// e.printStackTrace();
+				// LCD.drawString("error close", 0, 1);
 				break;
 			}
 
-			
 		}
 
 	}
 
 	public void comunicar(int aComunicar) {
-		while((conn == null) && (comunicandose != SIN_COMUNICACION)){
+		while ((conn == null) && (comunicandose != SIN_COMUNICACION)) {
 		}
-		if(comunicandose == GET_CONEXION){
+		if (comunicandose == GET_CONEXION) {
 			try {
 				dos.writeInt(aComunicar);
 				dos.flush();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				//e.printStackTrace();
+				// e.printStackTrace();
 				LCD.drawString("error escribir", 0, 1);
+				comunicandose = SIN_COMUNICACION;
 			}
 		}
 	}
-	
-	public int leer(){
+
+	public int leer() {
 		lectura = 0;
 		try {
 			lectura = dis.readInt();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			//e.printStackTrace();
+			// e.printStackTrace();
 			LCD.drawString("error lectura", 0, 1);
-			return 0;
+			comunicandose = SIN_COMUNICACION;
 		}
 		return lectura;
 	}

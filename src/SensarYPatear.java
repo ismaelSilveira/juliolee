@@ -1,17 +1,21 @@
 import lejos.nxt.LCD;
 import lejos.nxt.Sound;
+import lejos.nxt.addon.CompassHTSensor;
+import lejos.robotics.pathfinding.GridNode;
 import lejos.robotics.subsumption.Behavior;
 
 public class SensarYPatear implements Behavior {
-	Comunicacion com;
-	Boolean esperarColor;
-	int lectura;
-	
+	private Comunicacion com;
+	private Boolean esperarColor;
+	private int lectura;
+	private CompassHTSensor compass;
+
 	public static int AZUL = 1;
 	public static int NARANJA = 2;
-	
-	public SensarYPatear(Comunicacion com) {
+
+	public SensarYPatear(Comunicacion com, CompassHTSensor compass) {
 		this.com = com;
+		this.compass = compass;
 	}
 
 	@Override
@@ -23,32 +27,45 @@ public class SensarYPatear implements Behavior {
 	public void action() {
 		Sound.beep();
 		LCD.clear();
-		int i = 0;
-		while(com.getComunicandose() == Comunicacion.GET_CONEXION){
+		
+		int girarRuedaIzquierda = -1;
+		while (com.getComunicandose() == Comunicacion.GET_CONEXION) {
 			com.comunicar(Comunicacion.SENSAR);
 			lectura = com.leer();
-			while((com.getComunicandose() == Comunicacion.GET_CONEXION) && (lectura != AZUL) && (lectura != NARANJA)){
+			while ((com.getComunicandose() == Comunicacion.GET_CONEXION)
+					&& (lectura != AZUL) && (lectura != NARANJA)) {
 				lectura = com.leer();
-				LCD.drawInt(lectura, 0, i);
+				// LCD.drawInt(lectura, 0, i);
 			}
-			
-			if(lectura == NARANJA){
-				// TODO me acomodo para tirar
+
+			if (lectura == NARANJA) {
+				// me acomodo para tirar
 				Sound.beep();
+				float angulo = compass.getDegreesCartesian();
+				
+				if((angulo > 190) && (angulo < 170)){
+					girarRuedaIzquierda = 180 - Math.round(angulo);
+					
+					// TODO girar
+				}
 			}
-			i++;
+
 			com.comunicar(Comunicacion.PATEAR);
 			lectura = com.leer();
-			while((com.getComunicandose() == Comunicacion.GET_CONEXION) && (lectura != Comunicacion.PATEAR)){
+			while ((com.getComunicandose() == Comunicacion.GET_CONEXION)
+					&& (lectura != Comunicacion.PATEAR)) {
 				lectura = com.leer();
-				LCD.drawInt(lectura, 0, i);
-			} 
-			i++;
-			//LCD.drawInt(lectura, 1, 0);
+				// LCD.drawInt(lectura, 0, i);
+			}
+
+			// LCD.drawInt(lectura, 1, 0);
 			Sound.twoBeeps();
 			Sound.twoBeeps();
-			
 		}
+		
+		// me acomodo para seguir
+		girarRuedaIzquierda = 90 - girarRuedaIzquierda;
+		// TODO girar
 	}
 
 	@Override

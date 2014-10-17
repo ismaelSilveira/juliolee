@@ -18,7 +18,7 @@ public class JulioLee {
 		CompassHTSensor compass = new CompassHTSensor(SensorPort.S2);
 		compass.resetCartesianZero();
 		Comunicacion com = new Comunicacion();
-		//com.start();
+		com.start();
 
 		// Inicializacion de actuadores
 
@@ -27,8 +27,8 @@ public class JulioLee {
 		Behavior subir_pala = new SubirPala(Motor.B, Motor.A, Motor.C, sonar_izq, DISTANCIA_PARED, compass, com);
 		Behavior bajar_pala = new BajarPala(Motor.C, sonar_izq, DISTANCIA_PARED,com);
 		Behavior girar = new Girar(Motor.B, Motor.A, Motor.C, compass, com);
-		Behavior sensarYPatear = new SensarYPatear(com);
-		Behavior[] comportamientos = { avanzar, girar, bajar_pala, subir_pala/*, sensarYPatear*/ };
+		Behavior sensarYPatear = new SensarYPatear(com, compass);
+		Behavior[] comportamientos = { avanzar, girar, bajar_pala, subir_pala, sensarYPatear};
 		/*Motor.B.setSpeed(50);
 		Motor.A.setSpeed(50);
 		compass.startCalibration();
