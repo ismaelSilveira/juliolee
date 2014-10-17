@@ -36,8 +36,8 @@ public class SubirPala implements Behavior {
 		motorIzq.rotate(-180, true);
 		motorDer.rotate(-180, false);
 
-		motorIzq.rotate(400, true);
-		motorDer.rotate(-410, false);
+		motorIzq.rotate(570, true);
+		motorDer.rotate(-570, false);
 		//com.setComunicandose(Comunicacion.GET_CONEXION);
 	}
 

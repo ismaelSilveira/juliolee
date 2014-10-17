@@ -3,11 +3,12 @@ import lejos.nxt.Sound;
 import lejos.nxt.addon.CompassHTSensor;
 import lejos.robotics.subsumption.Behavior;
 
+import java.util.Date;
 import java.util.Random;
 
 public class Girar implements Behavior {
 	private NXTRegulatedMotor pala, motorIzq, motorDer;
-	private Random r = new Random(6846515);
+	private Random r = new Random(System.currentTimeMillis());
 	private boolean hasControl = false;
 	private Comunicacion com;
 	private CompassHTSensor compass;
@@ -56,8 +57,8 @@ public class Girar implements Behavior {
 			Sound.twoBeeps();
 		}
 		pala.rotateTo(0);
-		motorIzq.rotate(400, true);
-		motorDer.rotate(-410, false);
+		motorIzq.rotate(570, true);
+		motorDer.rotate(-570, false);
 		hasControl = false;
 	}
 
