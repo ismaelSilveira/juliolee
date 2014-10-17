@@ -1,4 +1,3 @@
-import lejos.nxt.LCD;
 import lejos.nxt.NXTRegulatedMotor;
 import lejos.nxt.Sound;
 import lejos.nxt.addon.CompassHTSensor;
@@ -23,7 +22,7 @@ public class Girar implements Behavior {
 
 	@Override
 	public boolean takeControl() {
-		return ((hasControl = hasControl || r.nextInt(1000) < 10) && (com.getComunicandose() == Comunicacion.SIN_COMUNICACION));
+		return ((hasControl = hasControl || r.nextInt(1000) == 500) && (com.getComunicandose() == Comunicacion.SIN_COMUNICACION));
 	}
 
 	@Override
