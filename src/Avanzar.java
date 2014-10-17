@@ -4,10 +4,10 @@ import lejos.robotics.subsumption.Behavior;
 
 public class Avanzar implements Behavior {
 	private NXTRegulatedMotor motorDer, motorIzq, pala;
-	UltrasonicSensor sonar;
-	final int DISTANCIA_PARED;
-	boolean seguir;
-	Comunicacion com;
+	private UltrasonicSensor sonar;
+	private final int DISTANCIA_PARED;
+	private boolean seguir;
+	private Comunicacion com;
 
 	public Avanzar(NXTRegulatedMotor izq, NXTRegulatedMotor der, NXTRegulatedMotor pala, UltrasonicSensor s, int dist_pared, Comunicacion com) {
 		sonar = s;
@@ -27,7 +27,7 @@ public class Avanzar implements Behavior {
 	public void action() {
 		seguir = true;
 		motorIzq.setSpeed(700);
-		motorDer.setSpeed(660);
+		motorDer.setSpeed(650);
 		motorDer.forward();
 		motorIzq.forward();
 		

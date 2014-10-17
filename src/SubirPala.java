@@ -31,29 +31,16 @@ public class SubirPala implements Behavior {
 
 	@Override
 	public void action() {
-		//Sound.beep();
+		Sound.beepSequence();
 		pala.rotateTo(0);
 		motorIzq.rotate(-180, true);
 		motorDer.rotate(-180, false);
-		motorIzq.rotate(395, true);
-		motorDer.rotate(-395, false);
-		float degrees = compass.getDegreesCartesian(); 
-		if (degrees > 75 && degrees < 105) {
-			//Sound.beep();
-		}
-		else if (degrees > 165 && degrees < 195){
-			//Sound.twoBeeps();
-		}
-		else if (degrees > 255 && degrees < 285){
-			//Sound.beepSequenceUp();
-		}
-		else if (degrees > 345 && degrees < 15){
-			//Sound.beepSequence();
-		}
-		com.setComunicandose(Comunicacion.GET_CONEXION);
+
+		motorIzq.rotate(400, true);
+		motorDer.rotate(-410, false);
+		//com.setComunicandose(Comunicacion.GET_CONEXION);
 	}
 
 	@Override
 	public void suppress() { }
-
 }
