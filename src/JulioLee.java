@@ -10,7 +10,7 @@ public class JulioLee {
 	// private static SensorPort PUERTO_COMPASS = SensorPort.S2;
 	private static SensorPort PUERTO_SONAR_IZQ = SensorPort.S3;
 	// private static SensorPort PUERTO_SONAR_DER = SensorPort.S1;
-	private static int DISTANCIA_PARED = 24;
+	private static int DISTANCIA_PARED = 23;
 
 	public static void main(String[] args) {
 		// Inicializacion de sensores
@@ -28,7 +28,7 @@ public class JulioLee {
 		Behavior bajar_pala = new BajarPala(Motor.C, sonar_izq, DISTANCIA_PARED,com);
 		Behavior girar = new Girar(Motor.B, Motor.A, Motor.C, compass, com);
 		Behavior sensarYPatear = new SensarYPatear(com);
-		Behavior[] comportamientos = { avanzar, girar, bajar_pala, subir_pala/*, sensarYPatear*/ };
+		Behavior[] comportamientos = { avanzar, bajar_pala, girar, subir_pala/*, sensarYPatear*/ };
 		/*Motor.B.setSpeed(50);
 		Motor.A.setSpeed(50);
 		compass.startCalibration();
