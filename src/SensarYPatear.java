@@ -28,7 +28,7 @@ public class SensarYPatear implements Behavior {
 
 	@Override
 	public void action() {
-		Sound.beep();
+		//Sound.beep();
 		LCD.clear();
 		
 		int girarRuedaIzquierda = -1;
@@ -43,10 +43,10 @@ public class SensarYPatear implements Behavior {
 
 			if (lectura == NARANJA) {
 				// me acomodo para tirar
-				Sound.beep();
+				Sound.playTone(440, 500);
 				float angulo = compass.getDegreesCartesian();
 				
-				if((angulo > 190) && (angulo < 170)){
+				if((angulo < 190) && (angulo > 170)){
 					girarRuedaIzquierda = 180 - Math.round(angulo);
 					motorIzq.rotate((girarRuedaIzquierda % 90) * 570, true);
 					motorDer.rotate((girarRuedaIzquierda % 90) * (-570), false);
@@ -62,10 +62,11 @@ public class SensarYPatear implements Behavior {
 			}
 
 			// LCD.drawInt(lectura, 1, 0);
-			Sound.twoBeeps();
-			Sound.twoBeeps();
+			//Sound.twoBeeps();
+			//Sound.twoBeeps();
 		}
 		
+		Sound.beepSequenceUp();
 		// me acomodo para seguir
 		girarRuedaIzquierda = 90 - girarRuedaIzquierda;
 		motorIzq.rotate((girarRuedaIzquierda % 90) * 570, true);

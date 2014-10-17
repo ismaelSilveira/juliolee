@@ -63,6 +63,7 @@ public class Comunicacion implements Runnable {
 				// TODO Auto-generated catch block
 				// e.printStackTrace();
 				// LCD.drawString("error close", 0, 1);
+				comunicandose = SIN_COMUNICACION;
 				break;
 			}
 
