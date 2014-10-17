@@ -1,3 +1,4 @@
+import lejos.nxt.LCD;
 import lejos.nxt.Sound;
 import lejos.robotics.subsumption.Behavior;
 
@@ -21,33 +22,37 @@ public class SensarYPatear implements Behavior {
 	@Override
 	public void action() {
 		Sound.beep();
-		esperarColor = true;
-		
-		while(esperarColor){
+		LCD.clear();
+		int i = 0;
+		while(com.getComunicandose() == Comunicacion.GET_CONEXION){
 			com.comunicar(Comunicacion.SENSAR);
-			lectura = 0;
-			while(esperarColor && (lectura != 0)){
-				lectura = com.getLectura();
+			lectura = com.leer();
+			while((com.getComunicandose() == Comunicacion.GET_CONEXION) && (lectura != AZUL) && (lectura != NARANJA)){
+				lectura = com.leer();
+				LCD.drawInt(lectura, 0, i);
 			}
 			
 			if(lectura == NARANJA){
 				// TODO me acomodo para tirar
-				Sound.twoBeeps();
+				Sound.beep();
 			}
-			
+			i++;
 			com.comunicar(Comunicacion.PATEAR);
-			lectura = 0;
-			while(esperarColor && (lectura != Comunicacion.PATEAR)){
-				lectura = com.getLectura();
-				Sound.twoBeeps();
-				Sound.twoBeeps();
+			lectura = com.leer();
+			while((com.getComunicandose() == Comunicacion.GET_CONEXION) && (lectura != Comunicacion.PATEAR)){
+				lectura = com.leer();
+				LCD.drawInt(lectura, 0, i);
 			} 
+			i++;
+			//LCD.drawInt(lectura, 1, 0);
+			Sound.twoBeeps();
+			Sound.twoBeeps();
+			
 		}
 	}
 
 	@Override
 	public void suppress() {
-		esperarColor = false;
 	}
 
 }

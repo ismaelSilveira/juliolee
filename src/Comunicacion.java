@@ -3,6 +3,7 @@ import java.io.DataOutputStream;
 import java.io.EOFException;
 import java.io.IOException;
 
+import lejos.nxt.LCD;
 import lejos.nxt.comm.NXTCommConnector;
 import lejos.nxt.comm.NXTConnection;
 import lejos.nxt.comm.RS485;
@@ -38,50 +39,62 @@ public class Comunicacion implements Runnable {
 	public void run() {
 		while (true) {
 			// espero a querer comunicarme
+			conn = null;
 			while (comunicandose == SIN_COMUNICACION) {
 			}
-
+			LCD.clear();
+LCD.drawString("quiero comunicar", 0, 1);
 			conn = conector.connect("JL2", NXTConnection.PACKET);
 			if (conn == null) {
 				comunicandose = SIN_COMUNICACION;
 			}
+			
 			dis = conn.openDataInputStream();
 			dos = conn.openDataOutputStream();
 
-			while (comunicandose != SIN_COMUNICACION) {
-				lectura = 0;
-				try {
-					lectura = dis.readInt();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					break;
-				}
-			}
-			
 			comunicandose = SIN_COMUNICACION;
 			try {
 				dis.close();
 				dos.close();
+				conn.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//e.printStackTrace();
+				LCD.drawString("error close", 0, 1);
 				break;
 			}
 
-			conn.close();
+			
 		}
 
 	}
 
 	public void comunicar(int aComunicar) {
+		while((conn == null) && (comunicandose != SIN_COMUNICACION)){
+		}
+		if(comunicandose == GET_CONEXION){
+			try {
+				dos.writeInt(aComunicar);
+				dos.flush();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				//e.printStackTrace();
+				LCD.drawString("error escribir", 0, 1);
+			}
+		}
+	}
+	
+	public int leer(){
+		lectura = 0;
 		try {
-			dos.writeInt(aComunicar);
-			dos.flush();
+			lectura = dis.readInt();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			LCD.drawString("error lectura", 0, 1);
+			return 0;
 		}
+		return lectura;
 	}
 
 	/**
