@@ -27,7 +27,7 @@ public class JulioLee {
 		Behavior subir_pala = new SubirPala(Motor.B, Motor.A, Motor.C, sonar_izq, DISTANCIA_PARED, compass, com);
 		Behavior bajar_pala = new BajarPala(Motor.C, sonar_izq, DISTANCIA_PARED,com);
 		Behavior girar = new Girar(Motor.B, Motor.A, Motor.C, compass, com);
-		Behavior sensarYPatear = new SensarYPatear(com, compass);
+		Behavior sensarYPatear = new SensarYPatear(com, compass, Motor.B, Motor.A);
 		Behavior[] comportamientos = { avanzar, bajar_pala, girar, subir_pala, sensarYPatear };
 		/*Motor.B.setSpeed(50);
 		Motor.A.setSpeed(50);

@@ -1,21 +1,24 @@
 import lejos.nxt.LCD;
+import lejos.nxt.NXTRegulatedMotor;
 import lejos.nxt.Sound;
 import lejos.nxt.addon.CompassHTSensor;
-import lejos.robotics.pathfinding.GridNode;
 import lejos.robotics.subsumption.Behavior;
 
 public class SensarYPatear implements Behavior {
 	private Comunicacion com;
-	private Boolean esperarColor;
 	private int lectura;
 	private CompassHTSensor compass;
-
+	private NXTRegulatedMotor motorIzq;
+	private NXTRegulatedMotor motorDer;
+	
 	public static int AZUL = 1;
 	public static int NARANJA = 2;
 
-	public SensarYPatear(Comunicacion com, CompassHTSensor compass) {
+	public SensarYPatear(Comunicacion com, CompassHTSensor compass, NXTRegulatedMotor motorIzq, NXTRegulatedMotor motorDer) {
 		this.com = com;
 		this.compass = compass;
+		this.motorDer = motorDer;
+		this.motorIzq = motorIzq;
 	}
 
 	@Override
@@ -45,8 +48,8 @@ public class SensarYPatear implements Behavior {
 				
 				if((angulo > 190) && (angulo < 170)){
 					girarRuedaIzquierda = 180 - Math.round(angulo);
-					
-					// TODO girar
+					motorIzq.rotate((girarRuedaIzquierda % 90) * 570, true);
+					motorDer.rotate((girarRuedaIzquierda % 90) * (-570), false);
 				}
 			}
 
@@ -65,7 +68,8 @@ public class SensarYPatear implements Behavior {
 		
 		// me acomodo para seguir
 		girarRuedaIzquierda = 90 - girarRuedaIzquierda;
-		// TODO girar
+		motorIzq.rotate((girarRuedaIzquierda % 90) * 570, true);
+		motorDer.rotate((girarRuedaIzquierda % 90) * (-570), false);
 	}
 
 	@Override
