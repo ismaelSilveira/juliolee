@@ -31,7 +31,7 @@ public class SensarYPatear implements Behavior {
 		//Sound.beep();
 		LCD.clear();
 		
-		int girarRuedaIzquierda = -1;
+		float girarRuedaIzquierda = -1;
 		while (com.getComunicandose() == Comunicacion.GET_CONEXION) {
 			com.comunicar(Comunicacion.SENSAR);
 			lectura = com.leer();
@@ -40,16 +40,39 @@ public class SensarYPatear implements Behavior {
 				lectura = com.leer();
 				// LCD.drawInt(lectura, 0, i);
 			}
-
+			LCD.drawInt(lectura, 0, 1);
 			if (lectura == NARANJA) {
 				// me acomodo para tirar
-				Sound.playTone(440, 500);
+				//Sound.playTone(440, 1000);
 				float angulo = compass.getDegreesCartesian();
 				
-				if((angulo < 190) && (angulo > 170)){
-					girarRuedaIzquierda = 180 - Math.round(angulo);
-					motorIzq.rotate((girarRuedaIzquierda % 90) * 570, true);
-					motorDer.rotate((girarRuedaIzquierda % 90) * (-570), false);
+				if((angulo > 190) || (angulo < 170)){
+					girarRuedaIzquierda = 180 - angulo;
+					LCD.drawInt(Math.round(girarRuedaIzquierda), 0, 0);
+					LCD.drawInt(Math.round(girarRuedaIzquierda / 90), 0, 1);
+					
+					float degrees = girarRuedaIzquierda / 90;
+					if (Math.round(degrees) == 0) {
+						Sound.twoBeeps();
+					}
+					else if (Math.round(degrees) == 1){
+						Sound.twoBeeps();
+						Sound.twoBeeps();
+					}
+					else if (Math.round(degrees) == 2){
+						Sound.twoBeeps();
+						Sound.twoBeeps();
+						Sound.twoBeeps();
+					}
+					else if (Math.round(degrees) == 3){
+						Sound.twoBeeps();
+						Sound.twoBeeps();
+						Sound.twoBeeps();
+						Sound.twoBeeps();
+					}
+					
+					motorIzq.rotate(Math.round(girarRuedaIzquierda / 90) * 570, true);
+					motorDer.rotate(Math.round(girarRuedaIzquierda / 90) * (-570), false);
 				}
 			}
 
@@ -69,8 +92,8 @@ public class SensarYPatear implements Behavior {
 		Sound.beepSequenceUp();
 		// me acomodo para seguir
 		girarRuedaIzquierda = 90 - girarRuedaIzquierda;
-		motorIzq.rotate((girarRuedaIzquierda % 90) * 570, true);
-		motorDer.rotate((girarRuedaIzquierda % 90) * (-570), false);
+		motorIzq.rotate(Math.round(girarRuedaIzquierda / 90) * 570, true);
+		motorDer.rotate(Math.round(girarRuedaIzquierda / 90) * (-570), false);
 	}
 
 	@Override

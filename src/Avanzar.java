@@ -41,5 +41,4 @@ public class Avanzar implements Behavior {
 	public void suppress() {
 		seguir = false;
 	}
-
 }
