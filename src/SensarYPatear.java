@@ -46,6 +46,11 @@ public class SensarYPatear implements Behavior {
 				//Sound.playTone(440, 1000);
 				float angulo = compass.getDegreesCartesian();
 				
+				if((angulo < 45) || (angulo > 315)){ // esta en 0
+					girarRuedaIzquierda = 180;
+				}else if((angulo >= 45))
+				
+				
 				if((angulo > 190) || (angulo < 170)){
 					girarRuedaIzquierda = 180 - angulo;
 					if(girarRuedaIzquierda < 20){
