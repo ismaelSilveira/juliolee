@@ -48,8 +48,9 @@ public class SensarYPatear implements Behavior {
 				
 				if((angulo > 190) || (angulo < 170)){
 					girarRuedaIzquierda = 180 - angulo;
-					LCD.drawInt(Math.round(girarRuedaIzquierda), 0, 0);
-					LCD.drawInt(Math.round(girarRuedaIzquierda / 90), 0, 1);
+					if(girarRuedaIzquierda < 0){
+						girarRuedaIzquierda = Math.abs(girarRuedaIzquierda) + 180;
+					}
 					
 					float degrees = girarRuedaIzquierda / 90;
 					if (Math.round(degrees) == 0) {
