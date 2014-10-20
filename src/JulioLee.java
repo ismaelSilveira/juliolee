@@ -32,8 +32,8 @@ public class JulioLee {
 		/*Motor.B.setSpeed(50);
 		Motor.A.setSpeed(50);
 		compass.startCalibration();
-		Motor.B.rotate(3040, true);
-		Motor.A.rotate(-3040);
+		Motor.B.rotate(4560, true);
+		Motor.A.rotate(-4560);
 		compass.stopCalibration();*/
 
 		Arbitrator arbitro = new Arbitrator(comportamientos);
