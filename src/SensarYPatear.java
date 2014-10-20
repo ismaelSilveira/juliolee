@@ -48,7 +48,7 @@ public class SensarYPatear implements Behavior {
 				
 				if((angulo > 190) || (angulo < 170)){
 					girarRuedaIzquierda = 180 - angulo;
-					if(girarRuedaIzquierda < 0){
+					if(girarRuedaIzquierda < 20){
 						girarRuedaIzquierda = Math.abs(girarRuedaIzquierda) + 180;
 					}
 					
@@ -70,6 +70,10 @@ public class SensarYPatear implements Behavior {
 						Sound.twoBeeps();
 						Sound.twoBeeps();
 						Sound.twoBeeps();
+					}
+					
+					if(Math.round(degrees) == 4){
+						girarRuedaIzquierda = 180;
 					}
 					
 					motorIzq.rotate(Math.round(girarRuedaIzquierda / 90) * 570, true);
