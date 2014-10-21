@@ -29,13 +29,13 @@ public class JulioLee {
 		Behavior girar = new Girar(Motor.B, Motor.A, Motor.C, compass, com);
 		Behavior sensarYPatear = new SensarYPatear(com, compass, Motor.B, Motor.A);
 		Behavior[] comportamientos = { avanzar, bajar_pala, girar, subir_pala, sensarYPatear };
-		/*Motor.B.setSpeed(50);
+	/*	Motor.B.setSpeed(50);
 		Motor.A.setSpeed(50);
 		compass.startCalibration();
 		Motor.B.rotate(4560, true);
 		Motor.A.rotate(-4560);
-		compass.stopCalibration();*/
-
+		compass.stopCalibration();
+*/
 		Arbitrator arbitro = new Arbitrator(comportamientos);
 		try {
 			Thread.sleep(3000);
