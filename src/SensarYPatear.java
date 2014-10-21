@@ -2,7 +2,11 @@ import lejos.nxt.LCD;
 import lejos.nxt.NXTRegulatedMotor;
 import lejos.nxt.Sound;
 import lejos.nxt.addon.CompassHTSensor;
+import lejos.nxt.comm.NXTConnection;
+import lejos.nxt.comm.USB;
 import lejos.robotics.subsumption.Behavior;
+import lejos.util.LogColumn;
+import lejos.util.NXTDataLogger;
 
 public class SensarYPatear implements Behavior {
 	private Comunicacion com;
@@ -10,6 +14,13 @@ public class SensarYPatear implements Behavior {
 	private CompassHTSensor compass;
 	private NXTRegulatedMotor motorIzq;
 	private NXTRegulatedMotor motorDer;
+	
+	/* TEST */
+	static NXTDataLogger logger = new NXTDataLogger();
+	static LogColumn r = new LogColumn("Grados",
+			LogColumn.DT_FLOAT);
+	static LogColumn[] columnDefs = new LogColumn[] { r };
+	/* TEST */
 	
 	public static int AZUL = 1;
 	public static int NARANJA = 2;
@@ -19,6 +30,14 @@ public class SensarYPatear implements Behavior {
 		this.compass = compass;
 		this.motorDer = motorDer;
 		this.motorIzq = motorIzq;
+		
+		NXTConnection connection = USB.waitForConnection();
+		try {
+			logger.startRealtimeLog(connection);
+		} catch (Exception e) {
+		}
+		
+		logger.setColumns(columnDefs); // must be after startRealtimeLog()
 	}
 
 	@Override
@@ -45,7 +64,8 @@ public class SensarYPatear implements Behavior {
 				// me acomodo para tirar
 				//Sound.playTone(440, 1000);
 				float angulo = compass.getDegreesCartesian();
-				
+				logger.writeLog(angulo);
+				logger.finishLine();
 				if((angulo > 190) || (angulo < 170)){
 					girarRuedaIzquierda = 180 - angulo;
 					if(girarRuedaIzquierda < 20){
