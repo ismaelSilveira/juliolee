@@ -86,6 +86,8 @@ public class SensarYPatear implements Behavior {
 				*/
 				motorIzq.rotate(Math.round(girarRuedaIzquierda / 90) * 560, true);
 				motorDer.rotate(Math.round(girarRuedaIzquierda / 90) * (-560), false);
+				motorIzq.rotate(180);
+				motorDer.rotate(180);
 			}
 
 			com.comunicar(Comunicacion.PATEAR);
