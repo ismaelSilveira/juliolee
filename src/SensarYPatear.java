@@ -86,8 +86,10 @@ public class SensarYPatear implements Behavior {
 				*/
 				motorIzq.rotate(Math.round(girarRuedaIzquierda / 90) * 560, true);
 				motorDer.rotate(Math.round(girarRuedaIzquierda / 90) * (-560), false);
-				motorIzq.rotate(180);
-				motorDer.rotate(180);
+				if (girarRuedaIzquierda != 0) {
+					motorIzq.rotate(180, true);
+					motorDer.rotate(180);
+				}
 			}
 
 			com.comunicar(Comunicacion.PATEAR);
@@ -98,6 +100,11 @@ public class SensarYPatear implements Behavior {
 				// LCD.drawInt(lectura, 0, i);
 			}
 
+			motorIzq.rotate(180, true);
+			motorDer.rotate(-180);
+			motorIzq.rotate(-180, true);
+			motorDer.rotate(180);
+			
 			// LCD.drawInt(lectura, 1, 0);
 			//Sound.twoBeeps();
 			//Sound.twoBeeps();
