@@ -20,8 +20,6 @@ public class JulioLee {
 		Comunicacion com = new Comunicacion();
 		com.start();
 
-		// Inicializacion de actuadores
-
 		// Inicializacion de comportamientos
 		Behavior avanzar = new Avanzar(Motor.B, Motor.A, Motor.C, sonar_izq, DISTANCIA_PARED, com);
 		Behavior subir_pala = new SubirPala(Motor.B, Motor.A, Motor.C, sonar_izq, DISTANCIA_PARED, compass, com);
