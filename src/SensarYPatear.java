@@ -1,5 +1,6 @@
 import lejos.nxt.LCD;
 import lejos.nxt.NXTRegulatedMotor;
+import lejos.nxt.Sound;
 import lejos.nxt.addon.CompassHTSensor;
 import lejos.robotics.subsumption.Behavior;
 
@@ -11,7 +12,7 @@ public class SensarYPatear implements Behavior {
 	
 	public static int AZUL = 1;
 	public static int NARANJA = 2;
-	public static int NADA = 0;
+	public static int NADA = 6;
 
 	public SensarYPatear(Comunicacion com, CompassHTSensor compass, NXTRegulatedMotor motorIzq, NXTRegulatedMotor motorDer) {
 		this.com = com;
@@ -96,8 +97,8 @@ public class SensarYPatear implements Behavior {
 			girarRuedaIzquierda = 90;
 		}
 		
-		motorIzq.rotate(Math.round(girarRuedaIzquierda / 90) * 540, true);
-		motorDer.rotate(Math.round(girarRuedaIzquierda / 90) * (-540), false);
+		motorIzq.rotate(Math.round(girarRuedaIzquierda / 90) * 570, true);
+		motorDer.rotate(Math.round(girarRuedaIzquierda / 90) * (-570), false);
 	}
 
 	@Override
