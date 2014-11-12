@@ -20,7 +20,7 @@ public class Avanzar implements Behavior {
 
 	@Override
 	public boolean takeControl() {
-		return (true && (com.getComunicandose() == Comunicacion.SIN_COMUNICACION));
+		return (true);
 	}
 
 	@Override

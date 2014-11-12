@@ -1,6 +1,5 @@
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.EOFException;
 import java.io.IOException;
 
 import lejos.nxt.LCD;
@@ -16,15 +15,15 @@ public class Comunicacion implements Runnable {
 	private DataInputStream dis;
 	private DataOutputStream dos;
 	private int lectura;
+	private Boolean comunicando;
 
-	public static int SIN_COMUNICACION = 0;
-	public static int GET_CONEXION = 1;
-	public static int SENSAR = 2;
-	public static int PATEAR = 3;
+	public final static int SENSAR = 2;
+	public final static int PATEAR = 3;
+	public final static int DISTANCIA = 4;
 
 	public Comunicacion() {
 		conector = RS485.getConnector();
-		comunicandose = SIN_COMUNICACION;
+		setComunicando(false);
 	}
 
 	public void start() {
@@ -40,30 +39,22 @@ public class Comunicacion implements Runnable {
 		while (true) {
 			// espero a querer comunicarme
 			conn = null;
-			while (comunicandose == SIN_COMUNICACION) {
-			}
 			LCD.clear();
 			// LCD.drawString("quiero comunicar", 0, 1);
 			conn = conector.connect("JL2", NXTConnection.PACKET);
-			if (conn == null) {
-				comunicandose = SIN_COMUNICACION;
-			}
 
 			dis = conn.openDataInputStream();
 			dos = conn.openDataOutputStream();
-
-			while (comunicandose == GET_CONEXION) {
-			}
-
+			
+			while(conn != null){}
+			
 			try {
 				dis.close();
 				dos.close();
 				conn.close();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				// e.printStackTrace();
 				// LCD.drawString("error close", 0, 1);
-				comunicandose = SIN_COMUNICACION;
 				break;
 			}
 
@@ -72,28 +63,28 @@ public class Comunicacion implements Runnable {
 	}
 
 	public void comunicar(int aComunicar) {
-		while ((conn == null) && (comunicandose != SIN_COMUNICACION)) {
+		while (conn == null) {
 		}
-		if (comunicandose == GET_CONEXION) {
-			try {
-				dos.writeInt(aComunicar);
-				dos.flush();
-			} catch (IOException e) {
-				// e.printStackTrace();
-				LCD.drawString("error escribir", 0, 1);
-				comunicandose = SIN_COMUNICACION;
-			}
+		try {
+			dos.writeInt(aComunicar);
+			dos.flush();
+		} catch (IOException e) {
+			conn.close();
+			// e.printStackTrace();
+			LCD.drawString("error escribir", 0, 1);
 		}
 	}
 
 	public int leer() {
 		lectura = 0;
 		try {
-			lectura = dis.readInt();
+			while(lectura == 0){
+				lectura = dis.readInt();
+			}
 		} catch (IOException e) {
+			conn.close();
 			// e.printStackTrace();
 			LCD.drawString("error lectura", 0, 1);
-			comunicandose = SIN_COMUNICACION;
 		}
 		return lectura;
 	}
@@ -118,6 +109,20 @@ public class Comunicacion implements Runnable {
 	 */
 	public int getLectura() {
 		return lectura;
+	}
+
+	/**
+	 * @return the comunicando
+	 */
+	public Boolean getComunicando() {
+		return comunicando;
+	}
+
+	/**
+	 * @param comunicando the comunicando to set
+	 */
+	public void setComunicando(Boolean comunicando) {
+		this.comunicando = comunicando;
 	}
 
 }

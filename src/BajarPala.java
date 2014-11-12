@@ -18,7 +18,7 @@ public class BajarPala implements Behavior {
 
 	@Override
 	public boolean takeControl() {
-		return ((motor.getTachoCount() == 0 && sonar_izq.getDistance() > DISTANCIA_PARED) && (com.getComunicandose() == Comunicacion.SIN_COMUNICACION));
+		return ((motor.getTachoCount() == 0 && sonar_izq.getDistance() > DISTANCIA_PARED));
 	}
 
 	@Override

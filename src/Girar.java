@@ -20,7 +20,7 @@ public class Girar implements Behavior {
 
 	@Override
 	public boolean takeControl() {
-		return ((hasControl = hasControl || r.nextInt(1000) == 500) && (com.getComunicandose() == Comunicacion.SIN_COMUNICACION));
+		return ((hasControl = hasControl || r.nextInt(1000) == 500));
 	}
 
 	@Override
