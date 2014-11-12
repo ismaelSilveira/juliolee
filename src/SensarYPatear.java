@@ -37,9 +37,10 @@ public class SensarYPatear implements Behavior {
 			com.comunicar(Comunicacion.SENSAR);
 			com.leer();
 			
-			// Si no tengo ninguna pelota, sigo con la ejecucion
+			// Si no tengo ninguna pelota, termino el comportamiento
 			if(com.getLectura() == NADA){
 				com.setComunicando(false);
+				continue;
 			}
 			
 			// Si tengo una pelota naranja, me acomodo para tirar

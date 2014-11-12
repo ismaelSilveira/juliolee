@@ -20,7 +20,7 @@ public class Girar implements Behavior {
 
 	@Override
 	public boolean takeControl() {
-		return ((hasControl = hasControl || r.nextInt(1000) == 500));
+		return false; //((hasControl = hasControl || r.nextInt(1000) == 500));
 	}
 
 	@Override
