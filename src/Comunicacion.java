@@ -42,6 +42,10 @@ public class Comunicacion implements Runnable {
 			LCD.clear();
 			// LCD.drawString("quiero comunicar", 0, 1);
 			conn = conector.connect("JL2", NXTConnection.PACKET);
+			
+			if(conn == null){
+				LCD.drawString("Error conexion", 0, 0);
+			}
 
 			dis = conn.openDataInputStream();
 			dos = conn.openDataOutputStream();
@@ -53,8 +57,8 @@ public class Comunicacion implements Runnable {
 				dos.close();
 				conn.close();
 			} catch (IOException e) {
-				// e.printStackTrace();
-				// LCD.drawString("error close", 0, 1);
+				//e.printStackTrace();
+				LCD.drawString("error close", 0, 1);
 				break;
 			}
 
@@ -70,7 +74,7 @@ public class Comunicacion implements Runnable {
 			dos.flush();
 		} catch (IOException e) {
 			conn.close();
-			// e.printStackTrace();
+			//e.printStackTrace();
 			LCD.drawString("error escribir", 0, 1);
 		}
 	}
