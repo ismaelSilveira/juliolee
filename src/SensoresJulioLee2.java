@@ -1,10 +1,10 @@
-public class sensorDistancia implements Runnable {
+public class SensoresJulioLee2 implements Runnable {
 	private Thread t;
 	private int distancia;
 	private int boton;
 	private Comunicacion com;
 	
-	public sensorDistancia(Comunicacion com) {
+	public SensoresJulioLee2(Comunicacion com) {
 		this.com = com;
 		this.distancia = 0;
 		this.boton = 0;

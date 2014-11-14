@@ -24,7 +24,7 @@ public class JulioLee {
 		Comunicacion com = new Comunicacion();
 		com.start();
 
-		sensorDistancia distancia = new sensorDistancia(com);
+		SensoresJulioLee2 distancia = new SensoresJulioLee2(com);
 		distancia.start();
 
 		// Inicializacion de comportamientos

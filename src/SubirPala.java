@@ -12,13 +12,13 @@ public class SubirPala implements Behavior {
 	private UltrasonicSensor sonar_izq;
 	private NXTRegulatedMotor pala;
 	private Comunicacion com;
-	private sensorDistancia distancia_arriba;
+	private SensoresJulioLee2 distancia_arriba;
 	private CompassHTSensor compass;
 
 	public SubirPala(NXTRegulatedMotor izq, NXTRegulatedMotor der,
 			NXTRegulatedMotor motor_pala, UltrasonicSensor s_izq,
 			int dist_pared, int dist_arriba, int dist_arr_zonamuerta_pared,
-			CompassHTSensor comp, Comunicacion com, sensorDistancia s_arriba,
+			CompassHTSensor comp, Comunicacion com, SensoresJulioLee2 s_arriba,
 			CompassHTSensor c) {
 		distancia_arriba = s_arriba;
 		pala = motor_pala;
