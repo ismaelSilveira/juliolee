@@ -1,4 +1,5 @@
 import lejos.nxt.NXTRegulatedMotor;
+import lejos.nxt.Sound;
 import lejos.nxt.UltrasonicSensor;
 import lejos.robotics.subsumption.Behavior;
 
@@ -23,6 +24,7 @@ public class BajarPala implements Behavior {
 
 	@Override
 	public void action() {
+		Sound.twoBeeps();
 		motor.rotate(-106,false);
 	}
 
