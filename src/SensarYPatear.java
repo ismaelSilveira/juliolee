@@ -59,13 +59,11 @@ public class SensarYPatear implements Behavior {
 				} else {
 					girarRuedaIzquierda = 270;
 				}
-				motorIzq.rotate(Math.round(girarRuedaIzquierda / 90) * 560,
-						true);
-				motorDer.rotate(Math.round(girarRuedaIzquierda / 90) * (-560),
-						false);
+				motorIzq.rotate(Math.round(girarRuedaIzquierda / 90) * 560, true);
+				motorDer.rotate(Math.round(girarRuedaIzquierda / 90) * (-560), false);
 				if (girarRuedaIzquierda != 0) {
 					motorIzq.rotate(180, true);
-					motorDer.rotate(180);
+					motorDer.rotate(180, false);
 				}
 			}
 
@@ -75,13 +73,20 @@ public class SensarYPatear implements Behavior {
 
 			// "bailo" para bajar las pelotas que quedaron trancadas
 			motorIzq.rotate(180, true);
-			motorDer.rotate(-180);
+			motorDer.rotate(-180, false);
 			motorIzq.rotate(-180, true);
-			motorDer.rotate(180);
+			motorDer.rotate(180, false);
 		}
-
+		
 		// me acomodo para seguir
 		if (giro) {
+			// vuelve a la posicion original
+			motorIzq.rotate(Math.round(girarRuedaIzquierda / 90) * (-560), true);
+			motorDer.rotate(Math.round(girarRuedaIzquierda / 90) * 560, false);
+			if (girarRuedaIzquierda != 0) {
+				motorIzq.rotate(-180, true);
+				motorDer.rotate(-180, false);
+			}
 			switch (girarRuedaIzquierda) {
 			case 0: // estaba en 180
 				girarRuedaIzquierda = 90;
@@ -99,9 +104,13 @@ public class SensarYPatear implements Behavior {
 		} else {
 			girarRuedaIzquierda = 90;
 		}
-
-		motorIzq.rotate(Math.round(girarRuedaIzquierda / 90) * 570, true);
-		motorDer.rotate(Math.round(girarRuedaIzquierda / 90) * (-570), false);
+		
+		motorIzq.rotate(250, true);
+		motorDer.rotate(250, false);
+		
+		motorIzq.rotate(1150, false);
+		//motorIzq.rotate(Math.round(girarRuedaIzquierda / 90) * 570, true);
+		//motorDer.rotate(Math.round(girarRuedaIzquierda / 90) * (-570), false);
 	}
 
 	@Override
