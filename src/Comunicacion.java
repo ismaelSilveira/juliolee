@@ -3,6 +3,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import lejos.nxt.LCD;
+import lejos.nxt.Sound;
 import lejos.nxt.comm.NXTCommConnector;
 import lejos.nxt.comm.NXTConnection;
 import lejos.nxt.comm.RS485;
@@ -43,24 +44,24 @@ public class Comunicacion implements Runnable {
 			LCD.clear();
 			// LCD.drawString("quiero comunicar", 0, 1);
 			conn = conector.connect("JL2", NXTConnection.PACKET);
-			
-			if(conn == null){
-				LCD.drawString("Error conexion", 0, 0);
-			}
 
-			dis = conn.openDataInputStream();
-			dos = conn.openDataOutputStream();
-			
-			while(conn != null){}
-			
-			try {
-				dis.close();
-				dos.close();
-				conn.close();
-			} catch (IOException e) {
-				//e.printStackTrace();
-				LCD.drawString("error close", 0, 1);
-				break;
+			if (conn == null) {
+				LCD.drawString("Error conexion", 0, 0);
+			} else {
+				dis = conn.openDataInputStream();
+				dos = conn.openDataOutputStream();
+
+				while (conn != null) { }
+
+				try {
+					dis.close();
+					dos.close();
+					conn.close();
+				} catch (IOException e) {
+					// e.printStackTrace();
+					LCD.drawString("error close", 0, 1);
+					break;
+				}
 			}
 
 		}
@@ -75,7 +76,7 @@ public class Comunicacion implements Runnable {
 			dos.flush();
 		} catch (IOException e) {
 			conn.close();
-			//e.printStackTrace();
+			// e.printStackTrace();
 			LCD.drawString("error escribir", 0, 1);
 		}
 	}
@@ -83,7 +84,7 @@ public class Comunicacion implements Runnable {
 	public int leer() {
 		lectura = 0;
 		try {
-			while(lectura == 0){
+			while (lectura == 0) {
 				lectura = dis.readInt();
 			}
 		} catch (IOException e) {
@@ -124,7 +125,8 @@ public class Comunicacion implements Runnable {
 	}
 
 	/**
-	 * @param comunicando the comunicando to set
+	 * @param comunicando
+	 *            the comunicando to set
 	 */
 	public void setComunicando(Boolean comunicando) {
 		this.comunicando = comunicando;
