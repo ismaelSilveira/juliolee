@@ -24,11 +24,8 @@ public class SensoresJulioLee2 implements Runnable {
 
 		while (true) {
 			if (!com.getComunicando()) {
-				Sound.beep();
 				com.comunicar(Comunicacion.DISTANCIA);
-				Sound.beep();
 				this.distancia = com.leer();
-				Sound.beep();
 			}
 			if (!com.getComunicando()) {
 				com.comunicar(Comunicacion.BOTON);
