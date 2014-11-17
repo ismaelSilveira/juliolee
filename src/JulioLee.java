@@ -22,21 +22,19 @@ public class JulioLee {
 		compass.resetCartesianZero();
 
 		Comunicacion com = new Comunicacion();
-		com.start();
+		//com.start();
 
 		SensoresJulioLee2 distancia = new SensoresJulioLee2(com);
-		distancia.start();
+		//distancia.start();
 
 		// Inicializacion de comportamientos
 		Behavior avanzar = new Avanzar(Motor.B, Motor.A);
-		Behavior subir_pala = new SubirPala(Motor.B, Motor.A, Motor.C,
-				sonar_izq, DISTANCIA_PARED, DISTANCIA_ARRIBA,
-				DISTANCIA_ARRIBA_ZM_PARED, compass, com, distancia, compass);
-		Behavior bajar_pala = new BajarPala(Motor.C, sonar_izq,
-				DISTANCIA_PARED, com);
+		Behavior subir_pala = new SubirPala(Motor.B, Motor.A, Motor.C, sonar_izq, DISTANCIA_PARED, DISTANCIA_ARRIBA,
+											DISTANCIA_ARRIBA_ZM_PARED, compass, com, distancia, compass);
+		Behavior bajar_pala = new BajarPala(Motor.C, sonar_izq, DISTANCIA_PARED, com);
 		Behavior girar = new Girar(Motor.B, Motor.A, Motor.C, compass, com);
 		Behavior sensarYPatear = new SensarYPatear(com, compass, Motor.B, Motor.A);
-		Behavior[] comportamientos = { avanzar, bajar_pala, girar, subir_pala, sensarYPatear };
+		Behavior[] comportamientos = { avanzar, bajar_pala, girar/*, subir_pala, sensarYPatear */};
 
 		/*
 		 * Motor.B.setSpeed(50); Motor.A.setSpeed(50);
