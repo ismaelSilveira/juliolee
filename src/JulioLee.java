@@ -10,10 +10,10 @@ public class JulioLee {
 	private static SensorPort PUERTO_COMPASS = SensorPort.S2;
 	private static SensorPort PUERTO_SONAR_IZQ = SensorPort.S3;
 	private static SensorPort PUERTO_SONAR_DER = SensorPort.S1;
-	private static int DISTANCIA_PARED = 21;
-	private static int DISTANCIA_ARRIBA = 296;
-	private static int DISTANCIA_ARRIBA_ZM_PARED = 1303;
-	private static int DISTANCIA_ARRIBA_ZM = 1093;
+	private static int DISTANCIA_PARED = 21;   //distancia de sensores abajo a pared para levantar pala
+	private static int DISTANCIA_ARRIBA = 296; //distancia de sensor optico a pared para levantar pala
+	private static int DISTANCIA_ARRIBA_ZM_PARED = 1303; //distancia minima de sensor opt de robot a pared de cancha contraria desde z.m. cuando la pala esta baja
+	private static int DISTANCIA_ARRIBA_ZM = 1093; //distancia minima de sensor opt de robot a pared de cancha contraria desde z.m. cuando la pala esta alta
 
 	public static void main(String[] args) {
 		// Inicializacion de sensores

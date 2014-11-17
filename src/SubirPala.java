@@ -45,7 +45,7 @@ public class SubirPala implements Behavior {
 		boolean miro_hacia_otra_cancha = orientacion < 45 || orientacion > 315;
 		int dist_arriba = distancia_arriba.getDistancia();
 		int dist_abajo = sonar_izq.getDistance();
-		
+
 		return dist_abajo <= DISTANCIA_PARED
 				&& (dist_arriba <= DISTANCIA_ARRIBA_PARED_GRANDE || (miro_hacia_otra_cancha && dist_arriba <= DISTANCIA_ARRIBA_ZM_PARED));
 	}
@@ -55,7 +55,7 @@ public class SubirPala implements Behavior {
 		motorIzq.rotate(-180, true);
 		motorDer.rotate(-180, false);
 		pala.rotateTo(0);
-//		com.setComunicando(true);
+		// com.setComunicando(true);
 	}
 
 	@Override

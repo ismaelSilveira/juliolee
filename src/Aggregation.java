@@ -1,7 +1,11 @@
 import lejos.robotics.subsumption.Behavior;
 
-
 public class Aggregation implements Behavior {
+	final int DIST_PALA;
+
+	public Aggregation(int dis_pala) {
+		DIST_PALA = dis_pala;
+	}
 
 	@Override
 	public boolean takeControl() {
