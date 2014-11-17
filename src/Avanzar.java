@@ -3,24 +3,17 @@ import lejos.nxt.UltrasonicSensor;
 import lejos.robotics.subsumption.Behavior;
 
 public class Avanzar implements Behavior {
-	private NXTRegulatedMotor motorDer, motorIzq, pala;
-	private UltrasonicSensor sonar;
-	private final int DISTANCIA_PARED;
+	private NXTRegulatedMotor motorDer, motorIzq;
 	private boolean seguir;
-	private Comunicacion com;
 
-	public Avanzar(NXTRegulatedMotor izq, NXTRegulatedMotor der, NXTRegulatedMotor pala, UltrasonicSensor s, int dist_pared, Comunicacion com) {
-		sonar = s;
+	public Avanzar(NXTRegulatedMotor izq, NXTRegulatedMotor der) {
 		motorDer = der;
 		motorIzq = izq;
-		DISTANCIA_PARED = dist_pared;
-		this.pala = pala;
-		this.com = com;
 	}
 
 	@Override
 	public boolean takeControl() {
-		return (true);
+		return true;
 	}
 
 	@Override
