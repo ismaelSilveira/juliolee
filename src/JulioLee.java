@@ -38,7 +38,8 @@ public class JulioLee {
 		Behavior sensarYPatear = new SensarYPatear(com, compass, Motor.B,
 				Motor.A);
 		Behavior[] comportamientos = { avanzar, bajar_pala, girar, subir_pala,
-				sensarYPatear };
+				sensarYPatear };		
+		
 		/*
 		 * Motor.B.setSpeed(50); Motor.A.setSpeed(50);
 		 * compass.startCalibration(); Motor.B.rotate(4560, true);

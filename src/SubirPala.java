@@ -1,7 +1,11 @@
 import lejos.nxt.NXTRegulatedMotor;
 import lejos.nxt.UltrasonicSensor;
 import lejos.nxt.addon.CompassHTSensor;
+import lejos.nxt.comm.NXTConnection;
+import lejos.nxt.comm.USB;
 import lejos.robotics.subsumption.Behavior;
+import lejos.util.LogColumn;
+import lejos.util.NXTDataLogger;
 
 public class SubirPala implements Behavior {
 	private NXTRegulatedMotor motorIzq, motorDer;
@@ -32,6 +36,7 @@ public class SubirPala implements Behavior {
 		motorDer = der;
 		this.com = com;
 		compass = c;
+
 	}
 
 	@Override
@@ -40,7 +45,7 @@ public class SubirPala implements Behavior {
 		boolean miro_hacia_otra_cancha = orientacion < 45 || orientacion > 315;
 		int dist_arriba = distancia_arriba.getDistancia();
 		int dist_abajo = sonar_izq.getDistance();
-
+		
 		return dist_abajo <= DISTANCIA_PARED
 				&& (dist_arriba <= DISTANCIA_ARRIBA_PARED_GRANDE || (miro_hacia_otra_cancha && dist_arriba <= DISTANCIA_ARRIBA_ZM_PARED));
 	}
@@ -50,7 +55,7 @@ public class SubirPala implements Behavior {
 		motorIzq.rotate(-180, true);
 		motorDer.rotate(-180, false);
 		pala.rotateTo(0);
-		com.setComunicando(true);
+//		com.setComunicando(true);
 	}
 
 	@Override
