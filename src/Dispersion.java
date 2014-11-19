@@ -47,14 +47,14 @@ public class Dispersion implements Behavior {
 		motorDer.backward();
 		motorIzq.backward();
 		
-		while(active && (sonar_izq.getDistance() <= DISTANCIA_DISPERSION_MAX) && (sensores.getBoton() == 0 ))
+		while(active && (sonar_izq.getDistance() <= DISTANCIA_DISPERSION_MAX) && (sensores.getBoton() == SensoresJulioLee2.BOTON_NO_APRETADO ))
 			Thread.yield();
 		
 		motorIzq.stop(true);
 		motorDer.stop();
 	
 		// si sali del while porque el boton de atras estaba apretado, espero sin hacer nada
-		if(sensores.getBoton() == 1){
+		if(sensores.getBoton() == SensoresJulioLee2.BOTON_APRETADO){
 			while(active && (sonar_izq.getDistance() <= DISTANCIA_DISPERSION_MAX))
 				Thread.yield();
 		}

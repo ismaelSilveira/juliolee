@@ -24,24 +24,29 @@ public class SensarYPatear implements Behavior {
 
 	@Override
 	public boolean takeControl() {
-		return com.getComunicando();
+		return com.getComunicandoSP();
 	}
 
 	@Override
 	public void action() {
+		Sound.beepSequence();
 		LCD.clear();
 
 		int girarRuedaIzquierda = -1;
 		Boolean giro = false;
+		
+		// En caso que se este pidiendo por el boton de atras o el sensor de arriba espero
+		while(com.getComunicandoS()){}
 
 		// Mientras tenga pelotas arriba
-		while (com.getComunicando()) {
+		while (com.getComunicandoSP()) {
+			Sound.beep();
 			com.comunicar(Comunicacion.SENSAR);
 			com.leer();
 
 			// Si no tengo ninguna pelota, termino el comportamiento
 			if (com.getLectura() == NADA) {
-				com.setComunicando(false);
+				com.setComunicandoSP(false);
 				continue;
 			}
 
@@ -77,6 +82,8 @@ public class SensarYPatear implements Behavior {
 			motorIzq.rotate(-180, true);
 			motorDer.rotate(180, false);
 		}
+		
+		com.setComunicandoSP(false);
 		
 		// me acomodo para seguir
 		if (giro) {

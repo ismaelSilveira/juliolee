@@ -1,4 +1,5 @@
 import lejos.nxt.NXTRegulatedMotor;
+import lejos.nxt.Sound;
 import lejos.nxt.UltrasonicSensor;
 import lejos.nxt.addon.CompassHTSensor;
 import lejos.nxt.comm.NXTConnection;
@@ -43,6 +44,12 @@ public class SubirPala implements Behavior {
 	public boolean takeControl() {
 		float orientacion = compass.getDegreesCartesian();
 		boolean miro_hacia_otra_cancha = orientacion < 45 || orientacion > 315;
+		
+		if(miro_hacia_otra_cancha)
+			Sound.beep();
+		else
+			Sound.twoBeeps();
+		
 		int dist_arriba = distancia_arriba.getDistancia();
 		int dist_abajo = sonar_izq.getDistance();
 
@@ -55,7 +62,7 @@ public class SubirPala implements Behavior {
 		motorIzq.rotate(-180, true);
 		motorDer.rotate(-180, false);
 		pala.rotateTo(0);
-		// com.setComunicando(true);
+		com.setComunicandoSP(true);
 	}
 
 	@Override

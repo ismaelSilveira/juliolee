@@ -24,7 +24,6 @@ public class BajarPala implements Behavior {
 
 	@Override
 	public void action() {
-		Sound.twoBeeps();
 		motor.rotate(-106,false);
 	}
 

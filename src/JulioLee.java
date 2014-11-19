@@ -23,12 +23,11 @@ public class JulioLee {
 		UltrasonicSensor sonar_izq = new UltrasonicSensor(PUERTO_SONAR_IZQ);
 		CompassHTSensor compass = new CompassHTSensor(PUERTO_COMPASS);
 		compass.resetCartesianZero();
-
+		
 		Comunicacion com = new Comunicacion();
-		//com.start();
-
+		com.start();
+		
 		SensoresJulioLee2 distancia = new SensoresJulioLee2(com);
-		//distancia.start();
 
 		// Inicializacion de comportamientos
 		Behavior avanzar = new Avanzar(Motor.B, Motor.A);
@@ -57,6 +56,10 @@ public class JulioLee {
 		} catch (Exception e) {
 		}
 		LCD.drawString("Arranca", 0, 0);
+		
+		distancia.start();
+		
 		arbitro.start();
+		
 	}
 }

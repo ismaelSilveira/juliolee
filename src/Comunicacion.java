@@ -16,7 +16,8 @@ public class Comunicacion implements Runnable {
 	private DataInputStream dis;
 	private DataOutputStream dos;
 	private int lectura;
-	private Boolean comunicando;
+	private Boolean comunicandoSP;
+	private Boolean comunicandoS;
 
 	public final static int SENSAR = 2;
 	public final static int PATEAR = 3;
@@ -25,11 +26,10 @@ public class Comunicacion implements Runnable {
 
 	public Comunicacion() {
 		conector = RS485.getConnector();
-		setComunicando(false);
+		setComunicandoSP(false);
 	}
 
 	public void start() {
-		System.out.println("Starting Comunicacion");
 		if (t == null) {
 			t = new Thread(this, "Comunicacion");
 			t.start();
@@ -76,20 +76,24 @@ public class Comunicacion implements Runnable {
 			dos.flush();
 		} catch (IOException e) {
 			conn.close();
-			// e.printStackTrace();
+			e.printStackTrace();
 			LCD.drawString("error escribir", 0, 1);
 		}
 	}
 
 	public int leer() {
 		lectura = 0;
+		while (conn == null)
+			Thread.yield();
+		
+		Sound.beep();
 		try {
 			while (lectura == 0) {
 				lectura = dis.readInt();
 			}
 		} catch (IOException e) {
 			conn.close();
-			// e.printStackTrace();
+			e.printStackTrace();
 			LCD.drawString("error lectura", 0, 1);
 		}
 		return lectura;
@@ -120,16 +124,30 @@ public class Comunicacion implements Runnable {
 	/**
 	 * @return the comunicando
 	 */
-	public Boolean getComunicando() {
-		return comunicando;
+	public Boolean getComunicandoSP() {
+		return comunicandoSP;
 	}
 
 	/**
 	 * @param comunicando
 	 *            the comunicando to set
 	 */
-	public void setComunicando(Boolean comunicando) {
-		this.comunicando = comunicando;
+	public void setComunicandoSP(Boolean comunicando) {
+		this.comunicandoSP = comunicando;
+	}
+
+	/**
+	 * @return the comunicandoS
+	 */
+	public Boolean getComunicandoS() {
+		return comunicandoS;
+	}
+
+	/**
+	 * @param comunicandoS the comunicandoS to set
+	 */
+	public void setComunicandoS(Boolean comunicandoS) {
+		this.comunicandoS = comunicandoS;
 	}
 
 }
