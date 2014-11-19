@@ -21,6 +21,7 @@ public class JulioLee {
 	public static void main(String[] args) {
 		// Inicializacion de sensores
 		UltrasonicSensor sonar_izq = new UltrasonicSensor(PUERTO_SONAR_IZQ);
+		UltrasonicSensor sonar_der = new UltrasonicSensor(PUERTO_SONAR_DER);
 		CompassHTSensor compass = new CompassHTSensor(PUERTO_COMPASS);
 		compass.resetCartesianZero();
 
@@ -39,9 +40,9 @@ public class JulioLee {
 				DISTANCIA_PARED, com);
 		Behavior girar = new Girar(Motor.B, Motor.A, Motor.C, compass, com);
 		Behavior sensarYPatear = new SensarYPatear(com, compass, Motor.B, Motor.A);
-		Behavior dispersion = new Dispersion(Motor.B, Motor.A, sonar_izq, DISTANCIA_PARED, DISTANCIA_ARRIBA,
+		Behavior dispersion = new Dispersion(Motor.B, Motor.A, sonar_izq, sonar_der, DISTANCIA_PARED, DISTANCIA_ARRIBA,
 				DISTANCIA_ARRIBA_ZM, distancia, compass, DISTANCIA_DISPERSION_MAX);
-		Behavior aggregation = new Aggregation(Motor.B, Motor.A, sonar_izq, DISTANCIA_PARED, DISTANCIA_ARRIBA,
+		Behavior aggregation = new Aggregation(Motor.B, Motor.A, sonar_izq, sonar_der, DISTANCIA_PARED, DISTANCIA_ARRIBA,
 				DISTANCIA_ARRIBA_ZM, distancia, compass, DISTANCIA_AGGREGATION_MAX, DISTANCIA_AGGREGATION_MIN);
 		Behavior[] comportamientos = { avanzar, bajar_pala, girar, subir_pala, sensarYPatear };
 
