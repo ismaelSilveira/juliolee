@@ -14,6 +14,10 @@ public class JulioLee {
 	private static int DISTANCIA_ARRIBA = 296;
 	private static int DISTANCIA_ARRIBA_ZM_PARED = 1303;
 	private static int DISTANCIA_ARRIBA_ZM = 1093;
+	private static int DISTANCIA_AGGREGATION_MAX = 40;
+	private static int DISTANCIA_AGGREGATION_MIN = 35;
+	private static int DISTANCIA_DISPERSION_MAX = 30;
+	
 
 	public static void main(String[] args) {
 		// Inicializacion de sensores
@@ -31,11 +35,15 @@ public class JulioLee {
 		Behavior avanzar = new Avanzar(Motor.B, Motor.A);
 		Behavior subir_pala = new SubirPala(Motor.B, Motor.A, Motor.C,
 				sonar_izq, DISTANCIA_PARED, DISTANCIA_ARRIBA,
-				DISTANCIA_ARRIBA_ZM_PARED, compass, com, distancia, compass);
+				DISTANCIA_ARRIBA_ZM_PARED, com, distancia, compass);
 		Behavior bajar_pala = new BajarPala(Motor.C, sonar_izq,
 				DISTANCIA_PARED, com);
 		Behavior girar = new Girar(Motor.B, Motor.A, Motor.C, compass, com);
 		Behavior sensarYPatear = new SensarYPatear(com, compass, Motor.B, Motor.A);
+		Behavior dispersion = new Dispersion(Motor.B, Motor.A, sonar_izq, DISTANCIA_PARED, DISTANCIA_ARRIBA,
+				DISTANCIA_ARRIBA_ZM, distancia, compass, DISTANCIA_DISPERSION_MAX);
+		Behavior aggregation = new Aggregation(Motor.B, Motor.A, sonar_izq, DISTANCIA_PARED, DISTANCIA_ARRIBA,
+				DISTANCIA_ARRIBA_ZM, distancia, compass, DISTANCIA_AGGREGATION_MAX, DISTANCIA_AGGREGATION_MIN);
 		Behavior[] comportamientos = { avanzar, bajar_pala, girar, subir_pala, sensarYPatear };
 
 		/*

@@ -22,7 +22,7 @@ public class SubirPala implements Behavior {
 	public SubirPala(NXTRegulatedMotor izq, NXTRegulatedMotor der,
 			NXTRegulatedMotor motor_pala, UltrasonicSensor s_izq,
 			int dist_pared, int dist_arriba, int dist_arr_zonamuerta_pared,
-			CompassHTSensor comp, Comunicacion com, SensoresJulioLee2 s_arriba,
+			Comunicacion com, SensoresJulioLee2 s_arriba,
 			CompassHTSensor c) {
 		distancia_arriba = s_arriba;
 		pala = motor_pala;

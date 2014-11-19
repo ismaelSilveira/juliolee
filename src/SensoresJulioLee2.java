@@ -14,7 +14,7 @@ public class SensoresJulioLee2 implements Runnable {
 
 	public void start() {
 		if (t == null) {
-			t = new Thread(this, "Comunicacion");
+			t = new Thread(this, "SensoresJulioLee2");
 			t.start();
 		}
 	}
@@ -26,6 +26,11 @@ public class SensoresJulioLee2 implements Runnable {
 			if (!com.getComunicando()) {
 				com.comunicar(Comunicacion.DISTANCIA);
 				this.distancia = com.leer();
+			}
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
 			if (!com.getComunicando()) {
 				com.comunicar(Comunicacion.BOTON);
