@@ -3,7 +3,6 @@ import lejos.nxt.UltrasonicSensor;
 import lejos.nxt.addon.CompassHTSensor;
 import lejos.robotics.subsumption.Behavior;
 
-
 public class Aggregation implements Behavior {
 	final int DISTANCIA_PARED;
 	final int DISTANCIA_ARRIBA_PARED_GRANDE;

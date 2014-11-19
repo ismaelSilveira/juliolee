@@ -23,8 +23,8 @@ public class Girar implements Behavior {
 
 	@Override
 	public boolean takeControl() {
-		rand = r.nextInt(rand);
-		return (hasControl |= (rand >= 400 && rand < 405));
+		rand = r.nextInt(rand+1);
+		return (hasControl = hasControl || (rand >= 400 && rand < 405));
 	}
 
 	@Override

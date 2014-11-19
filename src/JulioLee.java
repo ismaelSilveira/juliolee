@@ -18,7 +18,6 @@ public class JulioLee {
 	private static int DISTANCIA_AGGREGATION_MIN = 35;
 	private static int DISTANCIA_DISPERSION_MAX = 30;
 	
-
 	public static void main(String[] args) {
 		// Inicializacion de sensores
 		UltrasonicSensor sonar_izq = new UltrasonicSensor(PUERTO_SONAR_IZQ);
@@ -26,10 +25,10 @@ public class JulioLee {
 		compass.resetCartesianZero();
 
 		Comunicacion com = new Comunicacion();
-		com.start();
+		//com.start();
 
 		SensoresJulioLee2 distancia = new SensoresJulioLee2(com);
-		distancia.start();
+		//distancia.start();
 
 		// Inicializacion de comportamientos
 		Behavior avanzar = new Avanzar(Motor.B, Motor.A);
