@@ -11,16 +11,17 @@ public class Dispersion implements Behavior {
 	final int DISTANCIA_DISPERSION_MAX;
 
 	private NXTRegulatedMotor motorIzq, motorDer;
-	private UltrasonicSensor sonar_izq;
+	private UltrasonicSensor sonar_izq, sonar_der;
 	private SensoresJulioLee2 sensores;
 	private CompassHTSensor compass;
 	private Boolean active;
 	
-	public Dispersion(NXTRegulatedMotor izq, NXTRegulatedMotor der, UltrasonicSensor s_izq,
+	public Dispersion(NXTRegulatedMotor izq, NXTRegulatedMotor der, UltrasonicSensor s_izq, UltrasonicSensor s_der,
 			int dist_pared, int dist_arriba, int dist_arr_zonamuerta_pared, SensoresJulioLee2 sensores,
 			CompassHTSensor c, int max_distancia) {
 		this.sensores = sensores;
 		this.sonar_izq = s_izq;
+		this.sonar_der = s_der;
 		DISTANCIA_PARED = dist_pared;
 		DISTANCIA_ARRIBA_PARED_GRANDE = dist_arriba;
 		DISTANCIA_ARRIBA_ZM = dist_arr_zonamuerta_pared;
@@ -35,10 +36,10 @@ public class Dispersion implements Behavior {
 		float orientacion = compass.getDegreesCartesian();
 		boolean miro_hacia_otra_cancha = orientacion < 45 || orientacion > 315;
 		int dist_arriba = sensores.getDistancia();
-		int dist_abajo = sonar_izq.getDistance();
+		float dist_abajo = (sonar_izq.getDistance() + sonar_der.getDistance()) / 2;
 		
 		return dist_abajo <= DISTANCIA_DISPERSION_MAX
-				&& ( (miro_hacia_otra_cancha && (dist_arriba - dist_abajo - DISTANCIA_ARRIBA_ZM) > 15) || (dist_arriba - dist_abajo) > 15);
+				&& ((miro_hacia_otra_cancha && (dist_arriba - dist_abajo - DISTANCIA_ARRIBA_ZM) > 15) || (dist_arriba - dist_abajo) > 15);
 	}
 
 	@Override
