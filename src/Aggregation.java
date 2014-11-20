@@ -33,7 +33,7 @@ public class Aggregation implements Behavior {
 		dist_abajo = sonar_izq.getDistance() + sonar_der.getDistance() / 2;
 
 		return ((dist_abajo >= Constante.DISTANCIA_AGGREGATION_MIN) && (dist_abajo < Constante.DISTANCIA_AGGREGATION_MAX))
-				&& ((miro_hacia_otra_cancha && (dist_arriba/10 - dist_abajo - Constante.DISTANCIA_ZM) > Constante.DIFERNECIA_ARRIBA_Y_ABAJO) || (dist_arriba/10 - dist_abajo) > Constante.DIFERNECIA_ARRIBA_Y_ABAJO);
+				&& ((miro_hacia_otra_cancha && (dist_arriba/10 - dist_abajo - Constante.DISTANCIA_ARRIBA_ZM/10) > 3) || (dist_arriba/10 - dist_abajo) > Constante.DIFERNECIA_ARRIBA_Y_ABAJO);
 	}
 
 	@Override
@@ -42,9 +42,10 @@ public class Aggregation implements Behavior {
 		active = true;
 		velocidadAnteriorIzq = this.motorIzq.getSpeed();
 		velocidadAnteriorDer = this.motorDer.getSpeed();
+		Sound.beepSequence();
 		
-		this.motorIzq.setSpeed(900);
-		this.motorDer.setSpeed(900);
+		this.motorIzq.setSpeed(Constante.max_vel_izq);
+		this.motorDer.setSpeed(Constante.max_vel_der);
 		
 		while(active && (dist_abajo >= Constante.DISTANCIA_AGGREGATION_MIN) && (dist_abajo < Constante.DISTANCIA_AGGREGATION_MAX)){
 			this.motorIzq.forward();
@@ -59,8 +60,8 @@ public class Aggregation implements Behavior {
 	@Override
 	public void suppress() {
 		active = false;
-		this.motorIzq.setSpeed(velocidadAnteriorIzq);
-		this.motorDer.setSpeed(velocidadAnteriorDer);
+		this.motorIzq.setSpeed(Constante.avanzar_vel_izq);
+		this.motorDer.setSpeed(Constante.avanzar_vel_der);
 	}
 
 }

@@ -19,8 +19,8 @@ public class Avanzar implements Behavior {
 	@Override
 	public void action() {
 		seguir = true;
-		motorIzq.setSpeed(655);
-		motorDer.setSpeed(620);
+		motorIzq.setSpeed(Constante.avanzar_vel_izq);
+		motorDer.setSpeed(Constante.avanzar_vel_der);
 		motorDer.forward();
 		motorIzq.forward();
 		
