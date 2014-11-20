@@ -38,11 +38,9 @@ public class Aggregation implements Behavior {
 	public void action() {
 		active = true;
 		Sound.beepSequence();
-		velocidadAnteriorIzq = this.motorIzq.getSpeed();
-		velocidadAnteriorDer = this.motorDer.getSpeed();
 		
-		this.motorIzq.setSpeed(900);
-		this.motorDer.setSpeed(900);
+		this.motorIzq.setSpeed(Constante.max_vel_izq);
+		this.motorDer.setSpeed(Constante.max_vel_der);
 		
 		while(active && (sonar_izq.getDistance() >= Constante.DISTANCIA_AGGREGATION_MIN) && (sonar_izq.getDistance() < Constante.DISTANCIA_AGGREGATION_MAX)){
 			this.motorIzq.forward();
@@ -57,8 +55,8 @@ public class Aggregation implements Behavior {
 	@Override
 	public void suppress() {
 		active = false;
-		this.motorIzq.setSpeed(velocidadAnteriorIzq);
-		this.motorDer.setSpeed(velocidadAnteriorDer);
+		this.motorIzq.setSpeed(Constante.avanzar_vel_izq);
+		this.motorDer.setSpeed(Constante.avanzar_vel_der);
 	}
 
 }
