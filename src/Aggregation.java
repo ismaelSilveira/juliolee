@@ -11,6 +11,8 @@ public class Aggregation implements Behavior {
 	private CompassHTSensor compass;
 	private Boolean active;
 	private int velocidadAnteriorIzq, velocidadAnteriorDer;
+	private float dist_abajo = 0;
+	private boolean miro_hacia_otra_cancha = false;
 
 	public Aggregation(NXTRegulatedMotor izq, NXTRegulatedMotor der,
 			UltrasonicSensor s_izq, UltrasonicSensor s_der,
@@ -26,25 +28,25 @@ public class Aggregation implements Behavior {
 	@Override
 	public boolean takeControl() {
 		float orientacion = compass.getDegreesCartesian();
-		boolean miro_hacia_otra_cancha = orientacion < 45 || orientacion > 315;
+		miro_hacia_otra_cancha = orientacion < 45 || orientacion > 315;
 		int dist_arriba = sensores.getDistancia();
-		float dist_abajo = sonar_izq.getDistance() /* + sonar_der.getDistance()) / 2*/;
+		dist_abajo = sonar_izq.getDistance() + sonar_der.getDistance() / 2;
 
-		return ((dist_abajo >= Constante.DISTANCIA_AGGREGATION_MIN) && (dist_abajo < Constante.DISTANCIA_AGGREGATION_MAX));
-			//	&& ((miro_hacia_otra_cancha && (dist_arriba - dist_abajo - Constante.DISTANCIA_ARRIBA_ZM) > Constante.DIFERNECIA_ARRIBA_Y_ABAJO) || (dist_arriba - dist_abajo) > Constante.DIFERNECIA_ARRIBA_Y_ABAJO);
+		return ((dist_abajo >= Constante.DISTANCIA_AGGREGATION_MIN) && (dist_abajo < Constante.DISTANCIA_AGGREGATION_MAX))
+				&& ((miro_hacia_otra_cancha && (dist_arriba/10 - dist_abajo - Constante.DISTANCIA_ZM) > Constante.DIFERNECIA_ARRIBA_Y_ABAJO) || (dist_arriba/10 - dist_abajo) > Constante.DIFERNECIA_ARRIBA_Y_ABAJO);
 	}
 
 	@Override
 	public void action() {
+		Sound.beep();
 		active = true;
-		Sound.beepSequence();
 		velocidadAnteriorIzq = this.motorIzq.getSpeed();
 		velocidadAnteriorDer = this.motorDer.getSpeed();
 		
 		this.motorIzq.setSpeed(900);
 		this.motorDer.setSpeed(900);
 		
-		while(active && (sonar_izq.getDistance() >= Constante.DISTANCIA_AGGREGATION_MIN) && (sonar_izq.getDistance() < Constante.DISTANCIA_AGGREGATION_MAX)){
+		while(active && (dist_abajo >= Constante.DISTANCIA_AGGREGATION_MIN) && (dist_abajo < Constante.DISTANCIA_AGGREGATION_MAX)){
 			this.motorIzq.forward();
 			this.motorDer.forward();
 		}

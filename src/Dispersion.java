@@ -32,7 +32,7 @@ public class Dispersion implements Behavior {
 		float dist_abajo = sonar_izq.getDistance() /* + sonar_der.getDistance()) / 2*/;
 		
 		return dist_abajo <= Constante.DISTANCIA_DISPERSION_MAX
-				&& ((miro_hacia_otra_cancha && (dist_arriba - dist_abajo - Constante.DISTANCIA_ARRIBA_ZM) > Constante.DIFERNECIA_ARRIBA_Y_ABAJO) || (dist_arriba - dist_abajo) > Constante.DIFERNECIA_ARRIBA_Y_ABAJO);
+				&& ((miro_hacia_otra_cancha && (dist_arriba/10 - dist_abajo - Constante.DISTANCIA_ZM) > Constante.DIFERNECIA_ARRIBA_Y_ABAJO) || (dist_arriba/10 - dist_abajo) > Constante.DIFERNECIA_ARRIBA_Y_ABAJO);
 	}
 
 	@Override
