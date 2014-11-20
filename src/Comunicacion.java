@@ -86,7 +86,6 @@ public class Comunicacion implements Runnable {
 		while (conn == null)
 			Thread.yield();
 		
-		Sound.beep();
 		try {
 			while (lectura == 0) {
 				lectura = dis.readInt();

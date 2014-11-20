@@ -30,7 +30,6 @@ public class SensoresJulioLee2 implements Runnable {
 
 		while (true) {
 			if (!com.getComunicandoSP()) {
-				Sound.beepSequenceUp();
 				com.setComunicandoS(true);
 				com.comunicar(Comunicacion.DISTANCIA);
 				this.distancia = com.leer();
@@ -44,7 +43,6 @@ public class SensoresJulioLee2 implements Runnable {
 			}
 			
 			if (!com.getComunicandoSP()) {
-				Sound.beepSequenceUp();
 				com.setComunicandoS(true);
 				com.comunicar(Comunicacion.BOTON);
 				this.boton = com.leer();

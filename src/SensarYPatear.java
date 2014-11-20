@@ -29,7 +29,7 @@ public class SensarYPatear implements Behavior {
 
 	@Override
 	public void action() {
-		Sound.beepSequence();
+		//Sound.beepSequence();
 		LCD.clear();
 
 		int girarRuedaIzquierda = -1;
@@ -40,7 +40,6 @@ public class SensarYPatear implements Behavior {
 
 		// Mientras tenga pelotas arriba
 		while (com.getComunicandoSP()) {
-			Sound.beep();
 			com.comunicar(Comunicacion.SENSAR);
 			com.leer();
 

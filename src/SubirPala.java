@@ -10,9 +10,6 @@ import lejos.util.NXTDataLogger;
 
 public class SubirPala implements Behavior {
 	private NXTRegulatedMotor motorIzq, motorDer;
-	final int DISTANCIA_PARED;
-	final int DISTANCIA_ARRIBA_PARED_GRANDE;
-	final int DISTANCIA_ARRIBA_ZM_PARED;
 
 	private UltrasonicSensor sonar_izq;
 	private NXTRegulatedMotor pala;
@@ -22,7 +19,6 @@ public class SubirPala implements Behavior {
 
 	public SubirPala(NXTRegulatedMotor izq, NXTRegulatedMotor der,
 			NXTRegulatedMotor motor_pala, UltrasonicSensor s_izq,
-			int dist_pared, int dist_arriba, int dist_arr_zonamuerta_pared,
 			Comunicacion com, SensoresJulioLee2 s_arriba,
 			CompassHTSensor c) {
 		distancia_arriba = s_arriba;
@@ -30,9 +26,6 @@ public class SubirPala implements Behavior {
 		pala.resetTachoCount();
 		pala.setSpeed(30);
 		sonar_izq = s_izq;
-		DISTANCIA_PARED = dist_pared;
-		DISTANCIA_ARRIBA_PARED_GRANDE = dist_arriba;
-		DISTANCIA_ARRIBA_ZM_PARED = dist_arr_zonamuerta_pared;
 		motorIzq = izq;
 		motorDer = der;
 		this.com = com;
@@ -44,17 +37,11 @@ public class SubirPala implements Behavior {
 	public boolean takeControl() {
 		float orientacion = compass.getDegreesCartesian();
 		boolean miro_hacia_otra_cancha = orientacion < 45 || orientacion > 315;
-		
-		if(miro_hacia_otra_cancha)
-			Sound.beep();
-		else
-			Sound.twoBeeps();
-		
 		int dist_arriba = distancia_arriba.getDistancia();
 		int dist_abajo = sonar_izq.getDistance();
 
-		return dist_abajo <= DISTANCIA_PARED
-				&& (dist_arriba <= DISTANCIA_ARRIBA_PARED_GRANDE || (miro_hacia_otra_cancha && dist_arriba <= DISTANCIA_ARRIBA_ZM_PARED));
+		return dist_abajo <= Constante.DISTANCIA_PARED
+				&& (miro_hacia_otra_cancha && dist_arriba <= Constante.DISTANCIA_ARRIBA_ZM_PARED) || dist_arriba <= Constante.DISTANCIA_ARRIBA;
 	}
 
 	@Override
