@@ -28,8 +28,8 @@ public class JulioLee {
 		Behavior sensarYPatear = new SensarYPatear(com, compass, Motor.B, Motor.A);
 		//Behavior dispersion = new Dispersion(Motor.B, Motor.A, sonar_izq, sonar_der, distancia, compass);
 		Behavior aggregation = new Aggregation(Motor.B, Motor.A, sonar_izq, sonar_der, distancia, compass);
-		Behavior[] comportamientos = { avanzar, bajar_pala, girar, subir_pala, aggregation, sensarYPatear };
-
+//		Behavior[] comportamientos = { avanzar, bajar_pala, girar, subir_pala, aggregation, sensarYPatear };
+		Behavior[] comportamientos = {aggregation};
 		/*
 		 * Motor.B.setSpeed(50); Motor.A.setSpeed(50);
 		 * compass.startCalibration(); Motor.B.rotate(4560, true);
