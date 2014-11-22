@@ -56,7 +56,6 @@ public class Comunicacion implements Runnable {
 				try {
 					dis.close();
 					dos.close();
-					conn.close();
 				} catch (IOException e) {
 					// e.printStackTrace();
 					LCD.drawString("error close", 0, 1);
@@ -75,8 +74,8 @@ public class Comunicacion implements Runnable {
 			dos.writeInt(aComunicar);
 			dos.flush();
 		} catch (IOException e) {
-			conn.close();
-			e.printStackTrace();
+			conn = null;
+			//e.printStackTrace();
 			LCD.drawString("error escribir", 0, 1);
 		}
 	}
@@ -91,8 +90,8 @@ public class Comunicacion implements Runnable {
 				lectura = dis.readInt();
 			}
 		} catch (IOException e) {
-			conn.close();
-			e.printStackTrace();
+			conn = null;
+			//e.printStackTrace();
 			LCD.drawString("error lectura", 0, 1);
 		}
 		return lectura;

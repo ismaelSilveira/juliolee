@@ -4,7 +4,7 @@ import lejos.nxt.Sound;
 import lejos.nxt.addon.CompassHTSensor;
 import lejos.robotics.subsumption.Behavior;
 
-public class SensarYPatear implements Behavior {
+public class ClasificarYPatear implements Behavior {
 	private Comunicacion com;
 	private CompassHTSensor compass;
 	private NXTRegulatedMotor motorIzq;
@@ -14,7 +14,7 @@ public class SensarYPatear implements Behavior {
 	public static int NARANJA = 2;
 	public static int NADA = 6;
 
-	public SensarYPatear(Comunicacion com, CompassHTSensor compass,
+	public ClasificarYPatear(Comunicacion com, CompassHTSensor compass,
 			NXTRegulatedMotor motorIzq, NXTRegulatedMotor motorDer) {
 		this.com = com;
 		this.compass = compass;

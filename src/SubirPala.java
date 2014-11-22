@@ -46,6 +46,7 @@ public class SubirPala implements Behavior {
 
 	@Override
 	public void action() {
+		Sound.beep();
 		motorIzq.rotate(-180, true);
 		motorDer.rotate(-180, false);
 		pala.rotateTo(0);
