@@ -1,12 +1,7 @@
 import lejos.nxt.NXTRegulatedMotor;
-import lejos.nxt.Sound;
 import lejos.nxt.UltrasonicSensor;
 import lejos.nxt.addon.CompassHTSensor;
-import lejos.nxt.comm.NXTConnection;
-import lejos.nxt.comm.USB;
 import lejos.robotics.subsumption.Behavior;
-import lejos.util.LogColumn;
-import lejos.util.NXTDataLogger;
 
 
 public class Dispersion implements Behavior {
@@ -50,7 +45,6 @@ public class Dispersion implements Behavior {
 
 	@Override
 	public void action() {
-		Sound.twoBeeps();
 		active = true;
 		
 		motorDer.backward();
@@ -58,7 +52,7 @@ public class Dispersion implements Behavior {
 	
 		dist_abajo = Math.min(sonar_izq.getDistance(), sonar_der.getDistance());
 		
-		while(active && (sensores.getBoton() == SensoresJulioLee2.BOTON_NO_APRETADO ) && (dist_abajo <= Constante.DISTANCIA_DISPERSION_MAX))
+		while(active && (sensores.getBoton() == SensoresJulioLee2.BOTON_NO_APRETADO ) && (dist_abajo < Constante.DISTANCIA_DISPERSION_MAX))
 			dist_abajo = Math.min(sonar_izq.getDistance(), sonar_der.getDistance());
 		
 		motorIzq.stop(true);
@@ -66,7 +60,7 @@ public class Dispersion implements Behavior {
 	
 		// si sali del while porque el boton de atras estaba apretado, espero sin hacer nada
 		if(sensores.getBoton() == SensoresJulioLee2.BOTON_APRETADO){
-			while(active && (dist_abajo <= Constante.DISTANCIA_DISPERSION_MAX))
+			while(active && (dist_abajo < Constante.DISTANCIA_DISPERSION_MAX))
 				dist_abajo = Math.min(sonar_izq.getDistance(), sonar_der.getDistance());
 		}
 		

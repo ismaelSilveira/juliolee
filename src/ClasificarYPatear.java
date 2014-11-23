@@ -1,6 +1,5 @@
 import lejos.nxt.LCD;
 import lejos.nxt.NXTRegulatedMotor;
-import lejos.nxt.Sound;
 import lejos.nxt.addon.CompassHTSensor;
 import lejos.robotics.subsumption.Behavior;
 

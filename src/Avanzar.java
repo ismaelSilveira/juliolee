@@ -1,6 +1,4 @@
 import lejos.nxt.NXTRegulatedMotor;
-import lejos.nxt.Sound;
-import lejos.nxt.UltrasonicSensor;
 import lejos.robotics.subsumption.Behavior;
 
 public class Avanzar implements Behavior {
@@ -19,8 +17,6 @@ public class Avanzar implements Behavior {
 
 	@Override
 	public void action() {
-		Sound.twoBeeps();
-		Sound.twoBeeps();
 		seguir = true;
 		motorIzq.setSpeed(Constante.avanzar_vel_izq);
 		motorDer.setSpeed(Constante.avanzar_vel_der);

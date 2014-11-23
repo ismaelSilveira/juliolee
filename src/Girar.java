@@ -1,6 +1,4 @@
 import lejos.nxt.NXTRegulatedMotor;
-import lejos.nxt.Sound;
-import lejos.nxt.addon.CompassHTSensor;
 import lejos.robotics.subsumption.Behavior;
 
 import java.util.Random;
@@ -9,16 +7,12 @@ public class Girar implements Behavior {
 	private NXTRegulatedMotor pala, motorIzq, motorDer;
 	private Random r = new Random(System.currentTimeMillis());
 	private boolean hasControl = false;
-	private Comunicacion com;
-	private CompassHTSensor compass;
 	private int rand = r.nextInt();
 	
-	public Girar(NXTRegulatedMotor izq, NXTRegulatedMotor der, NXTRegulatedMotor pala, CompassHTSensor comp, Comunicacion com) {
+	public Girar(NXTRegulatedMotor izq, NXTRegulatedMotor der, NXTRegulatedMotor pala) {
 		this.pala = pala;
 		motorIzq = izq;
 		motorDer = der;
-		this.com = com;
-		compass = comp;
 	}
 
 	@Override

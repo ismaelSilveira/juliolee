@@ -22,8 +22,8 @@ public class JulioLee {
 		Behavior avanzar = new Avanzar(Motor.B, Motor.A);
 		Behavior subir_pala = new SubirPala(Motor.B, Motor.A, Motor.C,
 				sonar_izq, com, distancia, compass);
-		Behavior bajar_pala = new BajarPala(Motor.C, sonar_izq, com);
-		Behavior girar = new Girar(Motor.B, Motor.A, Motor.C, compass, com);
+		Behavior bajar_pala = new BajarPala(Motor.C, sonar_izq);
+		Behavior girar = new Girar(Motor.B, Motor.A, Motor.C);
 		Behavior sensarYPatear = new ClasificarYPatear(com, compass, Motor.B, Motor.A);
 		Behavior dispersion = new Dispersion(Motor.B, Motor.A, sonar_izq, sonar_der, distancia, compass);
 		Behavior aggregation = new Aggregation(Motor.B, Motor.A, sonar_izq, sonar_der, distancia, compass);

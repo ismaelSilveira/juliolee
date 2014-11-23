@@ -1,5 +1,4 @@
 import lejos.nxt.LCD;
-import lejos.nxt.Sound;
 
 public class SensoresJulioLee2 implements Runnable {
 	public final static int BOTON_APRETADO = 1;

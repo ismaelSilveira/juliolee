@@ -1,12 +1,7 @@
 import lejos.nxt.NXTRegulatedMotor;
-import lejos.nxt.Sound;
 import lejos.nxt.UltrasonicSensor;
 import lejos.nxt.addon.CompassHTSensor;
-import lejos.nxt.comm.NXTConnection;
-import lejos.nxt.comm.USB;
 import lejos.robotics.subsumption.Behavior;
-import lejos.util.LogColumn;
-import lejos.util.NXTDataLogger;
 
 public class SubirPala implements Behavior {
 	private NXTRegulatedMotor motorIzq, motorDer;
@@ -46,7 +41,6 @@ public class SubirPala implements Behavior {
 
 	@Override
 	public void action() {
-		Sound.beep();
 		motorIzq.rotate(-180, true);
 		motorDer.rotate(-180, false);
 		pala.rotateTo(0);

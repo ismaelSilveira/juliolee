@@ -1,5 +1,4 @@
 import lejos.nxt.NXTRegulatedMotor;
-import lejos.nxt.Sound;
 import lejos.nxt.UltrasonicSensor;
 import lejos.nxt.addon.CompassHTSensor;
 import lejos.robotics.subsumption.Behavior;
@@ -45,11 +44,7 @@ public class Aggregation implements Behavior {
 
 	@Override
 	public void action() {
-		Sound.beepSequenceUp();
 		active = true;
-		
-		if(miro_hacia_otra_cancha)
-			Sound.beepSequence();
 
 		this.motorIzq.setSpeed(Constante.max_vel_izq);
 		this.motorDer.setSpeed(Constante.max_vel_der);
